@@ -1,0 +1,19 @@
+<!--pages/items/items.wxml-->
+<view class="main_panel">
+  <view class="top_panel">
+    <text class="tip_text">物品类型</text>
+    <view class="items_type_list">
+      <block wx:for="{{item_type_data}}" wx:key="item">
+        <view class="item_type_item" style="border:{{item.border}};color:{{item.color}}" data-iid="{{item.id}}" bindtap="check_type">{{item.name}}</view>
+      </block>
+    </view>
+    <text class="tip_text">物品重量</text>
+    <view class="tui-content">
+      <view class="tui-slider-head" style="text-align: center">{{slider1}}公斤</view>
+      <view class="tui-slider-box">
+        <slider bindchange="changeSlider1" step="1"  min="4" max="20" value="{{slider1}}" />
+      </view>
+    </view>
+  </view>
+  <view class="bottom_button">确定</view>
+</view>

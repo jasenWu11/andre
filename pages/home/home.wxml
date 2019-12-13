@@ -1,0 +1,63 @@
+<!--pages/home/home.wxml-->
+<!--地图容器-->
+<view class="main_panel">
+  <view class="title_panel">
+    <view class="title_head_view">
+      <image class="title_head" src="/images/icons/head.png" mode="aspectFill"></image>
+    </view>
+    <text class="title_text">同城取送 1小时达</text>
+    <view class="title_city">
+      东莞
+      <image class="city_image" src="/images/icons/down.png"></image>
+    </view>
+  </view>
+
+  <map id="myMap" class="map_panel" longitude="{{longitude}}" latitude="{{latitude}}" scale='{{scale}}' polyline="{{polyline}}" markers="{{markers}}" covers="{{covers}}" show-location></map>
+  <block wx:if="{{isstart != 0||isend != 0}}">
+    <view class="clear_address" bindtap="clear_address">
+      <image class="left_image" src="/images/icons/left.png"></image>清除地址
+    </view>
+  </block>
+  <view class="address_panel">
+    <text class="address_panel_title">取送件</text>
+    <view class="address_piece"></view>
+    <view class="address_view">
+      <view class="address_circle"></view>
+      <view class="address_input" bindinput='getStart'>
+        <block wx:if="{{isstart == 0}}">从哪里出发</block>
+        <block wx:else>
+          <text class="address_text"> {{start_address}} {{start_doorplate}}</text>
+          <text class="phone_text">{{start_name}}  {{start_phone}}</text>
+        </block>
+      </view>
+      <text class="address_choose" bindtap="choose_address" data-type="0">地址簿</text>
+    </view>
+    <view class="line"></view>
+    <view class="address_view">
+      <view class="address_circle" style="background-color:#fb5e21"></view>
+      <view class="address_input" bindinput='getEnd'>
+        <block wx:if="{{isend == 0}}">送到那里去</block>
+        <block wx:else>
+          <text class="address_text"> {{end_address}} {{end_doorplate}}</text>
+          <text class="phone_text">{{end_name}}  {{end_phone}}</text>
+        </block>
+      </view>
+      <text class="address_choose" bindtap="choose_address" data-type="1">地址簿</text>
+    </view>
+    <view class="line"></view>
+    <view class="address_view">
+      <view class="address_rectangle"></view>
+      <view class="address_input" bindinput='getStart'>请选择要配送的物品信息</view>
+      <image class="address_next_image" src="/images/icons/right.png"></image>
+    </view>
+    <!-- 起点：
+    <input placeholder='请输入起点' bindinput='getStart'></input>
+    终点：
+    <input placeholder='请输入终点' bindinput='getEnd'></input>
+
+    两点之间的距离：{{resultDistance}}
+
+    <!--绑定点击事件-->
+    <!-- <button bindtap="driving" disabled='{{openNav}}'>开始导航</button> -->
+  </view>
+</view>
