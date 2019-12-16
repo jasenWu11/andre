@@ -1,5 +1,10 @@
 // pages/items/items.js
 var item_type_data = require("../../js/test.js").item_type_data;
+var item_type = false;
+var weight = 4;
+var type_id = 0;
+var price = '';
+var type_name = '小于5';
 Page({
 
   /**
@@ -7,7 +12,7 @@ Page({
    */
   data: {
     item_type_data: [],
-    slider1: 4
+    slider1: "小于5"
   },
 
   /**
@@ -81,6 +86,7 @@ Page({
   check_type: function(event) {
     var that = this;
     var iid = event.currentTarget.dataset.iid;
+    type_id = iid;
     var item_type_list = item_type_data;
     for (var i = 0; i < item_type_list.length; i++) {
       var border = '2rpx solid #666666'
@@ -90,13 +96,50 @@ Page({
       if (item_type_list[i].id == iid) {
         item_type_list[i].border = "2rpx solid #f5c352";
         item_type_list[i].color = "#f5c352";
+        type_name = item_type_list[i].name;
+        price = item_type_list[i].price;
       }
     }
     that.setData({
       item_type_data: item_type_list
     })
+    item_type = true;
   },
   changeSlider1(e) {
-    this.setData({ slider1: e.detail.value })
+    var slider_val = e.detail.value;
+    weight = e.detail.value;
+    if(slider_val == 4){
+      slider_val = "小于5"
+    }
+    this.setData({ slider1: slider_val })
+  },
+  confirm_item:function(){
+    var that = this;
+    if(item_type == false){
+      wx.showToast({
+        title: '站点名称为空',
+        image: '/images/icons/wrong.png',
+        duration: 3000
+      });
+    }else{
+      let pages = getCurrentPages(); //获取当前页面js里面的pages里的所有信息。
+    let prevPage = pages[pages.length - 2];
+    //prevPage 是获取上一个页面的js里面的pages的所有信息。 -2 是上一个页面，-3是上上个页面以此类推。
+
+      prevPage.setData({ // 将我们想要传递的参数在这里直接setData。上个页面就会执行这里的操作。
+        istype: 1,
+        typeid: type_id,
+        weight: weight,
+        weight_text:that.data.slider1,
+        type_name:type_name,
+        price:price
+      })
+    wx.navigateBack({
+      delta: 1, // 返回上一级页面。
+      success: function () {
+        prevPage.setitem_type(); // 执行前一个页面的onLoad方法
+      }
+    })
+    }
   }
 })

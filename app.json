@@ -1,7 +1,9 @@
 {
   "pages": [
-    "pages/items/items",
     "pages/home/home",
+    "pages/affirm_order/affirm_order",
+    "pages/add_address/add_address",
+    "pages/items/items",
     "pages/address_list/address_list",
     "pages/index/index",
     "pages/logs/logs",

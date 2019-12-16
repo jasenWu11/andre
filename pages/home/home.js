@@ -5,6 +5,7 @@ var latstart = '';
 var lngstart = '';
 var latend = '';
 var lngend = '';
+var distance = '';
 // 实例化API核心类
 let qqmapsdk = new QQMapWX({
   key: 'XC3BZ-MNB36-LF7S3-EUFKC-DEDNS-M2F5K'
@@ -32,17 +33,23 @@ Page({
     end_name: '',
     end_phone: '',
     end_latitude: '',
-    end_longitude: ''
+    end_longitude: '',
+    istype: 0,
+    weight: 4,
+    weight_text: '',
+    typeid: 0,
+    type_name: '',
+    price:''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
     let _page = this;
     wx.getLocation({
       type: 'gcj02', //返回可以用于wx.openLocation的经纬度
-      success: function(res) {
+      success: function (res) {
         _page.setData({
           latitude: res.latitude,
           longitude: res.longitude,
@@ -57,7 +64,7 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
+  onReady: function () {
 
   },
 
@@ -96,7 +103,7 @@ Page({
     });
     wx.getLocation({
       type: 'gcj02', //返回可以用于wx.openLocation的经纬度
-      success: function(res) {
+      success: function (res) {
         _page.setData({
           latitude: latstart,
           longitude: lngstart,
@@ -112,7 +119,7 @@ Page({
 
     qqmapsdk.geocoder({
       //address: res.address,
-      success: function(res) {
+      success: function (res) {
         let lat = res.result.location.lat;
         let lng = res.result.location.lng;
         wx.setStorageSync('latlngendSend', {
@@ -136,8 +143,8 @@ Page({
             latitude: latEnd,
             longitude: lngEnd
           }],
-          success: function(res) {
-            console.log(res, '两点之间的距离(代送)：', res.result.elements[1].distance);
+          success: function (res) {
+            console.log(res, 'latitude之间的距离(代送)：', res.result.elements[1].distance);
             wx.setStorageSync('kmSend', res.result.elements[1].distance + "");
           }
         });
@@ -201,7 +208,7 @@ Page({
     });
     wx.getLocation({
       type: 'gcj02', //返回可以用于wx.openLocation的经纬度
-      success: function(res) {
+      success: function (res) {
         _page.setData({
           latitude: latend,
           longitude: lngend,
@@ -222,7 +229,7 @@ Page({
     }
   },
   //事件回调函数
-  driving: function() {
+  driving: function () {
 
     let _page = this;
 
@@ -252,16 +259,23 @@ Page({
         latitude: latEnd,
         longitude: lngEnd
       }],
-      success: function(res) {
+      success: function (res) {
         console.log(res, '两点之间的距离：', res.result.elements[1].distance);
+        distance = res.result.elements[1].distance;
         _page.setData({
           resultDistance: res.result.elements[1].distance + '米'
         });
+        var isstart = _page.data.isstart;
+        var isend = _page.data.isend;
+        var istype = _page.data.istype;
+        if (isstart == 1 && isend == 1 && istype == 1) {
+          _page.toadd_order();
+        }
       },
-      fail: function(res) {
+      fail: function (res) {
         console.log(res);
       },
-      complete: function(res) {
+      complete: function (res) {
         console.log(res);
       }
     });
@@ -273,7 +287,7 @@ Page({
       method: 'GET',
       dataType: 'json',
       //请求成功回调
-      success: function(res) {
+      success: function (res) {
         let ret = res.data
         if (ret.status != 0) return; //服务异常处理
         let coors = ret.result.routes[0].polyline,
@@ -302,14 +316,14 @@ Page({
     };
     wx.request(opt);
   },
-  choose_address: function(event) {
+  choose_address: function (event) {
     var that = this;
     var type = event.currentTarget.dataset.type;
     wx.navigateTo({
       url: '../address_list/address_list?type=' + type
     })
   },
-  setcoordinates: function(type) {
+  setcoordinates: function (type) {
     console.log('type是' + type);
     if (type == 0) {
       this.getStart();
@@ -319,8 +333,9 @@ Page({
     if (this.data.isstart == 1 && this.data.isend == 1) {
       this.driving();
     }
+
   },
-  clear_address: function() {
+  clear_address: function () {
     var _page = this;
     this.setData({
       isend: 0,
@@ -343,5 +358,51 @@ Page({
         });
       }
     })
+  },
+  toitem_type: function () {
+    wx.navigateTo({
+      url: '../items/items'
+    })
+  },
+  setitem_type: function () {
+    var weight = this.data.weight;
+    var type_id = this.data.typeid;
+    console.log('种类是' + type_id + '重量是' + weight);
+    this.toadd_order();
+  },
+  add_address: function (event) {
+    var type = event.currentTarget.dataset.type;
+    wx.navigateTo({
+      url: '../add_address/add_address?type=' + type
+    })
+  },
+  toadd_order:function(){
+    var isstart = this.data.isstart;
+    var isend = this.data.isend;
+    var istype = this.data.istype;
+    if (isstart == 1 && isend == 1 && istype == 1) {
+      var start_info = {}
+      start_info["id"] = this.data.start_id;
+      start_info["address"] = this.data.start_address;
+      start_info["doorplate"] = this.data.start_doorplate;
+      start_info["name"] = this.data.start_name;
+      start_info["phone"] = this.data.start_phone;
+      start_info["latitude"] = this.data.start_latitude;
+      start_info["longitude"] = this.data.start_longitude;
+      var end_info = {}
+      start_info["id"] = this.data.end_id;
+      end_info["address"] = this.data.end_address;
+      end_info["doorplate"] = this.data.end_doorplate;
+      end_info["name"] = this.data.end_name;
+      end_info["phone"] = this.data.end_phone;
+      end_info["latitude"] = this.data.end_latitude;
+      end_info["longitude"] = this.data.end_longitude;
+      wx.setStorageSync('start_info', start_info);
+      wx.setStorageSync('end_info', end_info);
+      console.log('type_name其实是'+this.data.type_name);
+      wx.navigateTo({
+        url: '../affirm_order/affirm_order?weight=' + this.data.weight +'&weight_text='+this.data.weight_text+ '&typeid=' + this.data.typeid + '&typename=' + this.data.type_name + '&distance=' + distance +'&price='+this.data.price
+      })
+    }
   }
 })

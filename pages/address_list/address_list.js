@@ -132,6 +132,7 @@ Page({
         var ishidden = true;
         if (address_list[i].id == aid) {
           address_list[i].default_end = 1;
+          end_id = address_list[i].id;
           end_address = address_list[i].address;
           end_doorplate = address_list[i].doorplate;
           end_name = address_list[i].name;
@@ -180,5 +181,13 @@ Page({
         prevPage.setcoordinates(type); // 执行前一个页面的onLoad方法
       }
     })
+  },
+  add_address:function(){
+    wx.navigateTo({
+      url: '../add_address/add_address?type=' + 2
+    })
+  },
+  setcoordinates:function(){
+    console.log('刷新界面');
   }
 })

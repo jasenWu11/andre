@@ -23,7 +23,7 @@
     <view class="address_piece"></view>
     <view class="address_view">
       <view class="address_circle"></view>
-      <view class="address_input" bindinput='getStart'>
+      <view class="address_input" bindinput='getStart' bindtap="add_address" data-type="0">
         <block wx:if="{{isstart == 0}}">从哪里出发</block>
         <block wx:else>
           <text class="address_text"> {{start_address}} {{start_doorplate}}</text>
@@ -35,7 +35,7 @@
     <view class="line"></view>
     <view class="address_view">
       <view class="address_circle" style="background-color:#fb5e21"></view>
-      <view class="address_input" bindinput='getEnd'>
+      <view class="address_input" bindinput='getEnd' bindtap="add_address" data-type="1">
         <block wx:if="{{isend == 0}}">送到那里去</block>
         <block wx:else>
           <text class="address_text"> {{end_address}} {{end_doorplate}}</text>
@@ -47,17 +47,13 @@
     <view class="line"></view>
     <view class="address_view">
       <view class="address_rectangle"></view>
-      <view class="address_input" bindinput='getStart'>请选择要配送的物品信息</view>
+      <view class="address_input" bindtap='toitem_type'>
+        <block wx:if="{{istype == 0}}">请选择要配送的物品信息</block>
+        <block wx:else>
+         <text class="address_text"> {{type_name}}、{{weight_text}}公斤</text>
+        </block>
+      </view>
       <image class="address_next_image" src="/images/icons/right.png"></image>
     </view>
-    <!-- 起点：
-    <input placeholder='请输入起点' bindinput='getStart'></input>
-    终点：
-    <input placeholder='请输入终点' bindinput='getEnd'></input>
-
-    两点之间的距离：{{resultDistance}}
-
-    <!--绑定点击事件-->
-    <!-- <button bindtap="driving" disabled='{{openNav}}'>开始导航</button> -->
   </view>
 </view>

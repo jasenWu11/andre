@@ -1,4 +1,5 @@
 /* pages/items/items.wxss */
+@import '/style/weui.wxss';
 page{
   width: 100%;
   height: 100%;
@@ -62,4 +63,26 @@ page{
   line-height: 80rpx;
   font-size: 35rpx;
   color: #666;
+}
+
+.slider_min_max{
+  width: 690rpx;
+  display: flex;
+  justify-content: space-between;
+}
+
+.slider_min_max .slider_min_text{
+  font-size: 26rpx;
+  color: #666;
+  flex: 1;
+  display: flex;
+  justify-content: left;
+}
+
+.slider_min_max .slider_max_text{
+  font-size: 26rpx;
+  color: #666;
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
 }

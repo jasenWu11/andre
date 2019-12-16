@@ -13,7 +13,11 @@
       <view class="tui-slider-box">
         <slider bindchange="changeSlider1" step="1"  min="4" max="20" value="{{slider1}}" />
       </view>
+      <view class="slider_min_max">
+        <text class="slider_min_text">小于5公斤</text>
+        <text class="slider_max_text">20公斤</text>
+      </view>
     </view>
   </view>
-  <view class="bottom_button">确定</view>
+  <view class="bottom_button" bindtap="confirm_item">确定</view>
 </view>

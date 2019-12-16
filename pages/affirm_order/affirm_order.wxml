@@ -1,0 +1,57 @@
+<!--pages/affirm_order/affirm_order.wxml-->
+<view class="main_panel">
+  <map id="myMap" class="map_panel" longitude="{{longitude}}" latitude="{{latitude}}" scale='{{scale}}' polyline="{{polyline}}" markers="{{markers}}" covers="{{covers}}" show-location></map>
+  <view class="content_panel">
+    <view class="address_panel">
+      <view class="address_view">
+        <view class="address_rectangle"></view>
+        <view class="address_input" bindtap='toitem_type'>
+          <text class="address_text"> {{type_name}}、{{weight_text}}公斤</text>
+        </view>
+      </view>
+    </view>
+    <view class="address_panel">
+      <view class="address_view">
+        <view class="address_circle"></view>
+        <view class="address_input" bindinput='getStart' bindtap="add_address" data-type="0">
+          <text class="address_text"> {{start_address}} {{start_doorplate}}</text>
+          <text class="phone_text">{{start_name}}  {{start_phone}}</text>
+        </view>
+      </view>
+      <view class="line"></view>
+      <view class="address_view">
+        <view class="address_circle" style="background-color:#fb5e21"></view>
+        <view class="address_input" bindinput='getEnd' bindtap="add_address" data-type="1">
+          <text class="address_text"> {{end_address}} {{end_doorplate}}</text>
+          <text class="phone_text">{{end_name}}  {{end_phone}}</text>
+        </view>
+      </view>
+    </view>
+    <view class="address_panel">
+      <view class="address_view" style="padding: 15rpx 25rpx;">
+        <text class="address_text"> 备注：</text>
+        <input class="weui-input" value="{{address}}" placeholder="物品描述或送件要求"  bindinput="data_Input" />
+      </view>
+      <view class="line"></view>
+      <view class="time_view">
+        <text class="address_text"> 取件时间</text>
+        <picker mode="date" value="{{date}}" start="{{start_date}}" end="{{end_date}}" bindchange="bindDateChange">
+          <view class="weui-input">{{start_date}}</view>
+        </picker>
+        <picker mode="time" value="{{time}}" start="00:00" end="23:59" bindchange="bindTimeChange">
+          <view class="weui-input">{{time}}</view>
+        </picker>
+        <image class="address_next_image" src="/images/icons/right.png"></image>
+      </view>
+    </view>
+  </view>
+  <view class="bottom_panel">
+    <view class="bottom_text">
+      总价
+      <text style="color:#ff0000;margin-left:10rpx;font-size:22rpx;"> ￥</text>
+      <text style="color:#ff0000;font-size:32rpx;margin-right:10rpx;">{{moneys}}</text>
+      <image class="right_image" src="/images/icons/right.png"></image>
+    </view>
+    <view class="button_view">提交订单</view>
+  </view>
+</view>
