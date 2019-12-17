@@ -10,10 +10,10 @@ Page({
     isHide: false
   },
 
-  onLoad: function () {
+  onLoad: function() {
     wx.getLocation({
       type: 'gcj02', //返回可以用于wx.openLocation的经纬度
-      success: function (res) {
+      success: function(res) {
         latitude = res.latitude;
         longitude = res.longitude;
       }
@@ -24,10 +24,10 @@ Page({
     var that = this;
     //查看是否授权
     wx.getSetting({
-      success: function (res) {
+      success: function(res) {
         if (res.authSetting['scope.userInfo']) {
           wx.getUserInfo({
-            success: function (res) {
+            success: function(res) {
               // 用户已经授权过,不需要显示授权页面,所以不需要改变 isHide 的值
               // 根据自己的需求有其他操作再补充
               // 我这里实现的是在用户授权成功后，调用微信的 wx.login 接口，从而获取code
@@ -74,7 +74,7 @@ Page({
     });
   },
 
-  bindGetUserInfo: function (e) {
+  bindGetUserInfo: function(e) {
     if (e.detail.userInfo) {
       //用户按了允许授权按钮
       var that = this;
@@ -97,7 +97,7 @@ Page({
         content: '您点击了拒绝授权，将无法进入小程序，请授权之后再进入!!!',
         showCancel: false,
         confirmText: '返回授权',
-        success: function (res) {
+        success: function(res) {
           // 用户没有授权成功，不需要改变 isHide 的值
           if (res.confirm) {
             console.log('用户点击了“返回授权”');
@@ -106,7 +106,7 @@ Page({
       });
     }
   },
-  binguser: function (code, username, picurl) {
+  binguser: function (code, username, picurl){
     wx.request({
       url: app.globalData.URL + '/andre/user/login.do?openid=' + code + '&nickname=' + username + '&url=' + picurl + '&latitude=' + latitude + '&longitude=' + longitude + '&userType=1',
       method: 'post',

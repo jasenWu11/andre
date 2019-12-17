@@ -57,8 +57,8 @@ Page({
         });
       }
     })
-    wx.clearStorageSync('latlngstart');
-    wx.clearStorageSync('latlngend');
+    wx.removeStorage('latlngstart');
+    wx.removeStorage('latlngend');
   },
 
   /**
