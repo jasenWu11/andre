@@ -45,8 +45,34 @@
       </view>
     </view>
   </view>
+  <view class="weui-demo-dialog {{istrue ? 'weui-demo-dialog_show' : ''}}">
+  <view class="weui-mask" bindtap="closeDialog"></view>
+  <view class="weui-half-screen-dialog" style="bottom:111rpx;" catchtap="stopEvent">
+    <view class="weui-half-screen-dialog__hd" style="height:6em;">
+      <view class="dialog_title_panel">
+        <text class="dialog_order_text"></text>
+        <text class="dialog_title_text">费用细则</text>
+        <text class="dialog_order_text">价格规则 ></text>
+      </view>
+    </view>
+    <view class="weui-half-screen-dialog__bd">
+      <view class="dialog_text_panel">
+        <view class="row_text">
+          <text>基础配送费</text><text>￥6</text>
+        </view>
+        <view class="row_text">
+          <text>距离附加<text class="small_text">10.1公里</text></text><text>￥6</text>
+        </view>
+        <view class="row_text">
+          <text>重量附加<text class="small_text">10.0公斤</text></text><text>￥6</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
   <view class="bottom_panel">
-    <view class="bottom_text">
+    <view class="bottom_text" bindtap="clickDialog">
       总价
       <text style="color:#ff0000;margin-left:10rpx;font-size:22rpx;"> ￥</text>
       <text style="color:#ff0000;font-size:32rpx;margin-right:10rpx;">{{moneys}}</text>

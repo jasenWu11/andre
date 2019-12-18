@@ -1,9 +1,9 @@
 // pages/affirm_order/affirm_order.js
 let QQMapWX = require('../../libs/qqmap-wx-jssdk.min.js');
-var latstart = 22.978630;
-var lngstart = 113.838140;
-var latend = 22.981760;
-var lngend = 113.912910;
+var latstart = '';
+var lngstart = '';
+var latend = '';
+var lngend = '';
 var weight = '';
 var weight_text = ''
 var type_id = '';
@@ -41,7 +41,9 @@ Page({
     end_phone: '',
     end_latitude: '',
     end_longitude: '',
-    moneys:5
+    moneys:6,
+    showDialog: false,
+    istrue:false
   },
 
   /**
@@ -70,6 +72,10 @@ Page({
     var end_phone = wx.getStorageSync("end_info").phone;
     var end_latitude = wx.getStorageSync("end_info").latitude;
     var end_longitude = wx.getStorageSync("end_info").longitude;
+    latstart = start_latitude;
+    lngstart = start_longitude;
+    latend = end_latitude;
+    lngend = end_longitude;
     this.setmap();
     this.driving();
     var statrdate = this.getNowFormatDate('-',0);
@@ -188,31 +194,6 @@ Page({
       scale: 16
     });
 
-    /**
-     * 获取两点的距离
-     */
-    qqmapsdk.calculateDistance({
-      to: [{
-        latitude: latstart,
-        longitude: lngstart
-      }, {
-        latitude: latend,
-        longitude: lngend
-      }],
-      success: function (res) {
-        console.log(res, '两点之间的距离：', res.result.elements[1].distance);
-        _page.setData({
-          resultDistance: res.result.elements[1].distance + '米'
-        });
-      },
-      fail: function (res) {
-        console.log(res);
-      },
-      complete: function (res) {
-        console.log(res);
-      }
-    });
-
     //网络请求设置
     let opt = {
       //WebService请求地址，from为起点坐标，to为终点坐标，开发key为必填
@@ -280,15 +261,38 @@ Page({
     return time;
   },
   getmoneys:function(price,weight,distance){
-    var moneys = 5;
-    if(weight<2){
-      if(distance<1000){
-        moneys = 5;
-      }
-    }else{
-      moneys = distance/1000*price*weight*0.7
-      moneys = moneys.toFixed(2);
+    var moneys = 6;
+    distance = distance/1000
+    if(distance<=3){
+      moneys = moneys+distance*1
+    }else if(distance>3){
+      moneys = moneys+3*1+(distance-3)*2
     }
+    if(weight>=6&&weight<10){
+      moneys = moneys + 6
+    }else if(weight>=10){
+      moneys = moneys +10
+    }
+    moneys = Math.ceil(moneys)
     return moneys
-  }
+  },
+    openDialog: function () {
+        this.setData({
+            istrue: true
+        })
+    },
+    closeDialog: function () {
+      var istrue = 
+        this.setData({
+            istrue: false
+        })
+    },
+    clickDialog:function(){
+      if(this.data.istrue == false){
+        this.openDialog();
+      }else{
+        this.closeDialog();
+      }
+    }
+
 })
