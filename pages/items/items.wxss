@@ -38,8 +38,8 @@ page{
 }
 
 .items_type_list .item_type_item{
-  width: 200rpx;
-  height: 55rpx;
+  width: 210rpx;
+  height: 60rpx;
   display: flex;
   margin-top: 10rpx;
   margin-bottom: 10rpx;

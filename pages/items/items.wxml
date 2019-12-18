@@ -4,7 +4,7 @@
     <text class="tip_text">物品类型</text>
     <view class="items_type_list">
       <block wx:for="{{item_type_data}}" wx:key="item">
-        <view class="item_type_item" style="border:{{item.border}};color:{{item.color}}" data-iid="{{item.id}}" bindtap="check_type">{{item.name}}</view>
+        <view class="item_type_item" style="border:{{item.border}};color:{{item.color}}" data-iid="{{item.id}}" bindtap="check_type">{{item.categoryname}}</view>
       </block>
     </view>
     <text class="tip_text">物品重量</text>

@@ -39,7 +39,7 @@ Page({
                   console.log("用户的code:" + res.code);
                   var code = res.code;
                   console.log('username是' + username + '和picurl是' + picurl)
-                  if (token == '') {
+                  if (token != '哈哈') {
                     wx.getUserInfo({
                       success: res => {
                         console.log('得到' + JSON.stringify(res.userInfo));
@@ -108,7 +108,7 @@ Page({
   },
   binguser: function (code, username, picurl) {
     wx.request({
-      url: app.globalData.URL + '/andre/user/login.do?openid=' + code + '&nickname=' + username + '&url=' + picurl + '&latitude=' + latitude + '&longitude=' + longitude + '&userType=1',
+      url: app.globalData.URL + '/user/login.do?openid=' + code + '&nickname=' + username + '&url=' + picurl + '&latitude=' + latitude + '&longitude=' + longitude + '&userType=1',
       method: 'post',
       dataType: 'json',
       responseType: 'text',

@@ -1,0 +1,46 @@
+<!--pages/rule/rule.wxml-->
+<view class="main_panel">
+  <view class="row_text_panel">
+    <text class="title_text">基础配送费</text>
+    <text class="price_text">6元</text>
+  </view>
+  <view class="row_text_panel">
+    <text class="title_text">距离附加费</text>
+  </view>
+  <view class="content_text_panel">
+    <text class="desc_text">0-3公里部分</text>
+    <text class="price_text">每公里+1元</text>
+  </view>
+   <view class="content_text_panel">
+    <text class="desc_text">3-100公里部分</text>
+    <text class="price_text">每公里+2元</text>
+  </view>
+  <view class="row_text_panel">
+    <text class="title_text">重量附加费</text>
+  </view>
+  <view class="content_text_panel">
+    <text class="desc_text">6-10公斤时</text>
+    <text class="price_text">+6元</text>
+  </view>
+   <view class="content_text_panel">
+    <text class="desc_text">超过10公斤时</text>
+    <text class="price_text">+10元</text>
+  </view>
+  <view class="row_text_panel">
+    <text class="title_text">特殊时段费</text>
+  </view>
+  <view class="content_text_panel">
+    <text class="desc_text">00:00-06:00</text>
+    <text class="price_text">+6元</text>
+  </view>
+   <view class="content_text_panel">
+    <text class="desc_text">22:00-24:00</text>
+    <text class="price_text">+3元</text>
+  </view>
+  <view class="row_text_panel">
+    <text class="title_text">溢价说明</text>
+  </view>
+  <view class="content_text_panel">
+    <text class="desc_text">在恶劣天气，下单高峰期等情况下，为促进骑手接单，平台可能会临时适当调整价格，以保障良好的服务体验。</text>
+  </view>
+</view>

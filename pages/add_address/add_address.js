@@ -1,4 +1,5 @@
 // pages/address_list/add_address.js
+const app = getApp();
 const chooseLocation = requirePlugin('chooseLocation');
 var type = ''
 var longitude = '';
@@ -150,57 +151,101 @@ Page({
       });
     }
     else{
-      if (type == 0) {
-        start_id = 3;
-          start_address = address;
-          start_doorplate = doorplate;
-          start_name = name;
-          start_phone = phone;
-          start_latitude = latitude;
-          start_longitude = longitude;
-      } else {
-          end_id = 4;
-          end_address = address;
-          end_doorplate = doorplate;
-          end_name = name;
-          end_phone = phone;
-          end_latitude = latitude;
-          end_longitude = longitude;
-      }
+      console.log('cookie是' + wx.getStorageSync('cookieKey'));
+      wx.request({
+        url: app.globalData.URL + '/common/address/add.do',
+        method: 'get',
+        dataType: 'json',
+        data: {
+          phone: phone,
+          address: address,
+          username: name,
+          longitude: longitude,
+          latitude: latitude,
+          defaultstart: 0,//默认0
+          defaultend: 0, //默认0
+
+        }, 
+        header: {
+          'Content-Type': 'application/json',
+          'Cookie': wx.getStorageSync('cookieKey')
+        },
+        responseType: 'text',
+        success: function (res) {
+          console.log("返回结果" + JSON.stringify(res));
+          var status = res.data.status;
+          if (status == 0) {
+            if (type == 0) {
+              start_id = 3;
+              start_address = address;
+              start_doorplate = doorplate;
+              start_name = name;
+              start_phone = phone;
+              start_latitude = latitude;
+              start_longitude = longitude;
+            } else {
+              end_id = 4;
+              end_address = address;
+              end_doorplate = doorplate;
+              end_name = name;
+              end_phone = phone;
+              end_latitude = latitude;
+              end_longitude = longitude;
+            }
+            let pages = getCurrentPages(); //获取当前页面js里面的pages里的所有信息。
+            let prevPage = pages[pages.length - 2];
+            //prevPage 是获取上一个页面的js里面的pages的所有信息。 -2 是上一个页面，-3是上上个页面以此类推。
+            if (type == 0) {
+              prevPage.setData({ // 将我们想要传递的参数在这里直接setData。上个页面就会执行这里的操作。
+                isstart: 1,
+                start_id: start_id,
+                start_address: start_address,
+                start_doorplate: start_doorplate,
+                start_name: start_name,
+                start_phone: start_phone,
+                start_latitude: start_latitude,
+                start_longitude: start_longitude
+              })
+            } else {
+              prevPage.setData({ // 将我们想要传递的参数在这里直接setData。上个页面就会执行这里的操作。
+                isend: 1,
+                end_id: end_id,
+                end_address: end_address,
+                end_doorplate: end_doorplate,
+                end_name: end_name,
+                end_phone: end_phone,
+                end_latitude: end_latitude,
+                end_longitude: end_longitude
+              })
+            }
+            wx.navigateBack({
+              delta: 1, // 返回上一级页面。
+              success: function () {
+                prevPage.setcoordinates(type); // 执行前一个页面的onLoad方法
+              }
+            })
+            // var data = res.data.data.data;
+            // var item_type_list = data;
+            // for (var i = 0; i < item_type_list.length; i++) {
+            //   var border = '2rpx solid #666666'
+            //   var color = '#000000'
+            //   item_type_list[i].border = border;
+            //   item_type_list[i].color = color;
+            // }
+            // that.setData({
+            //   item_type_data: item_type_list
+            // })
+          }
+        },
+        fail: function (res) {
+          console.log("返回错误" + res);
+        },
+        complete: function (res) {
+          console.log("启动请求" + res);
+        },
+      })
     }
     console.log('地址是' + address + '，门牌号是' + doorplate + '，联系人是' + name + '，联系方式是' + phone + '，经度是' + longitude + '，纬度是' + latitude);
-    let pages = getCurrentPages(); //获取当前页面js里面的pages里的所有信息。
-    let prevPage = pages[pages.length - 2];
-    //prevPage 是获取上一个页面的js里面的pages的所有信息。 -2 是上一个页面，-3是上上个页面以此类推。
-    if (type == 0) {
-      prevPage.setData({ // 将我们想要传递的参数在这里直接setData。上个页面就会执行这里的操作。
-        isstart: 1,
-        start_id: start_id,
-        start_address: start_address,
-        start_doorplate: start_doorplate,
-        start_name: start_name,
-        start_phone: start_phone,
-        start_latitude: start_latitude,
-        start_longitude: start_longitude
-      })
-    } else {
-      prevPage.setData({ // 将我们想要传递的参数在这里直接setData。上个页面就会执行这里的操作。
-        isend: 1,
-        end_id: end_id,
-        end_address: end_address,
-        end_doorplate: end_doorplate,
-        end_name: end_name,
-        end_phone: end_phone,
-        end_latitude: end_latitude,
-        end_longitude: end_longitude
-      })
-    }
-    wx.navigateBack({
-      delta: 1, // 返回上一级页面。
-      success: function () {
-        prevPage.setcoordinates(type); // 执行前一个页面的onLoad方法
-      }
-    })
   },
   isPoneAvailable: function (pone) {
     var myreg = /^[1][3,4,5,7,8][0-9]{9}$/;

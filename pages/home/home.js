@@ -251,19 +251,23 @@ Page({
     /**
      * 获取两点的距离
      */
+     
+    console.log('起点经度'+lngStart+'起点纬度'+latStart);
+    console.log('终点经度'+lngEnd+'终点纬度'+latEnd);
     qqmapsdk.calculateDistance({
+      from: {
+              latitude: latStart,
+              longitude: lngStart
+            },
       to: [{
-        latitude: latStart,
-        longitude: lngStart
-      }, {
-        latitude: latEnd,
-        longitude: lngEnd
-      }],
+              latitude: latEnd,
+              longitude: lngEnd
+          }],
       success: function (res) {
-        console.log(res, '两点之间的距离：', res.result.elements[1].distance);
-        distance = res.result.elements[1].distance;
+        console.log(res, '两点之间的距离：', res.result.elements[0].distance);
+        distance = res.result.elements[0].distance;
         _page.setData({
-          resultDistance: res.result.elements[1].distance + '米'
+          resultDistance: res.result.elements[0].distance + '米'
         });
         var isstart = _page.data.isstart;
         var isend = _page.data.isend;
@@ -377,6 +381,7 @@ Page({
     })
   },
   toadd_order:function(){
+    var that = this;
     var isstart = this.data.isstart;
     var isend = this.data.isend;
     var istype = this.data.istype;
@@ -399,10 +404,16 @@ Page({
       end_info["longitude"] = this.data.end_longitude;
       wx.setStorageSync('start_info', start_info);
       wx.setStorageSync('end_info', end_info);
-      console.log('type_name其实是'+this.data.type_name);
-      wx.navigateTo({
-        url: '../affirm_order/affirm_order?weight=' + this.data.weight +'&weight_text='+this.data.weight_text+ '&typeid=' + this.data.typeid + '&typename=' + this.data.type_name + '&distance=' + distance +'&price='+this.data.price
-      })
+      console.log('type_name其实是'+this.data.type_name+'距离是'+distance);
+      setTimeout(function () {
+        wx.navigateTo({
+          url: '/pages/affirm_order/affirm_order?weight=' + that.data.weight + '&weight_text=' + that.data.weight_text + '&typeid=' + that.data.typeid + '&typename=' + that.data.type_name + '&distance=' + distance + '&price=' + that.data.price,
+          success: function (res) { console.log(res) },
+          fail: function (res) { console.log(res) },
+          complete: function (res) { console.log(res) },
+        })
+      }, 100)
+      console.log('跳转');
     }
   }
 })

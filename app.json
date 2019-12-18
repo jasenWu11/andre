@@ -1,9 +1,12 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/rule/rule",
     "pages/home/home",
     "pages/items/items",
+    "pages/add_address/add_address",
     "pages/address_list/address_list",
+    "pages/affirm_order/affirm_order",
     "pages/logs/logs",
     "component/wxzx-slider/wxzx-slider",
     "component/wxzx-progress/wxzx-progress"

@@ -1,8 +1,13 @@
 /* pages/affirm_order/affirm_order.wxss */
+@import '/style/weui.wxss';
 page{
   width: 100%;
   height: 100%;
   background-color: #eeeeee;
+}
+.affirm_panel{
+  height:100%;
+  width:100%;
 }
 .main_panel{
   height: 100%;
@@ -22,6 +27,7 @@ page{
 }
 .bottom_panel{
   width: 100%;
+  height:110rpx;
   background-color: #ffffff;
   padding: 15rpx 20rpx 15rpx 20rpx;
   box-sizing: border-box;
@@ -29,6 +35,7 @@ page{
   align-items: center;
   color: #3e3e3e;
   font-size: 24rpx;
+  z-index:9999;
 }
 .bottom_text{
   display: flex;
@@ -143,5 +150,79 @@ page{
 .time_view .address_next_image{
   width: 20rpx;
   height: 20rpx;
+}
+.weui-demo-dialog{
+  visibility:hidden;
+  opacity:0;
+  transition:all .3s;
+  z-index:5000;
+}
+.weui-half-screen-dialog{
+  transition:all .3s;
+  transform:translateY(100%);
+  border-top-left-radius: 0rpx;
+  border-top-right-radius: 0rpx;
+  z-index:5000;
+}
+.weui-demo-dialog_show{
+  visibility:visible;
+  opacity:1;
+  z-index:5000;
+}
+.weui-demo-dialog_show .weui-half-screen-dialog{
+    transform:translateY(0);
+}
+
+.dialog_text_panel{
+  width:100%;
+  height:160rpx;
+  display:flex;
+  flex-direction:column;
+  align-items: center;
+  justify-content: space-between;
+  padding:15rpx 0rpx;
+  border-top:1rpx solid #999999;
+  border-bottom:1rpx solid #999999;
+}
+.row_text{
+  width:100%;
+  display:flex;
+  flex-direction:row;
+  justify-content: space-between;
+  color:#000000;
+  font-size:26rpx;
+  z-index:5000;
+}
+.row_text .small_text{
+  color:#888888;
+  font-size:24rpx;
+  margin-left:15rpx;
+  align-items: center;
+  justify-content: center;
+}
+.dialog_title_panel{
+  width:100%;
+  height:100%;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+}
+.dialog_title_text{
+  height:100%;
+  flex:1;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  color:#000000;
+  font-size:28rpx;
+}
+.dialog_order_text{
+  width:150rpx;
+  height:100%;
+  display:flex;
+  justify-content: flex-end;
+  align-items: center;
+  color:#66ccff;
+  font-size:24rpx;
 }
 
