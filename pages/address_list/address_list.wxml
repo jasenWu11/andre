@@ -2,16 +2,16 @@
 <view class="main_panel">
   <view class="address_list">
     <block wx:for="{{address_data}}" wx:key="item">
-      <view class="address_item" bindtap="change_address" data-aid="{{item.id}}">
+      <view class="address_item">
         <view class="check_panel">
           <image class="check_image" src="/images/icons/check.png" hidden="{{item.ishidden}}"></image>
         </view>
-        <view class="address_view">
-          <text class="address_text">{{item.address}}  {{item.doorplate}}</text>
-          <text class="people_text">{{item.name}}   {{item.phone}}</text>
+        <view class="address_view" bindtap="change_address" data-aid="{{item.id}}">
+          <text class="address_text">{{item.address}}  {{item.details}}</text>
+          <text class="people_text">{{item.username}}   {{item.phone}}</text>
         </view>
         <view class="edit_view">
-          <image class="edit_image" src="/images/icons/edit.png"></image>
+          <image class="edit_image" src="/images/icons/edit.png" bindtap="to_update" data-aid="{{item.id}}"></image>
         </view>
       </view>
       <view class="line"></view>

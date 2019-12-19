@@ -1,0 +1,44 @@
+<!--pages/update_address/update_address.wxml-->
+<view class="main_panel">
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell">
+      <view class="weui-cell__hd">
+        <view class="weui-label">地址</view>
+      </view>
+      <view class="weui-cell__bd">
+        <input class="weui-input" value="{{address}}" placeholder="点击搜索地址" disabled="disabled" bindtap="turn_to_map"/>
+      </view>
+      <view class="weui-cell__ft">
+        <image class="weui-vcode-img" src="/images/icons/right.png" style="width: 30rpx;height:30rpx"></image>
+      </view>
+    </view>
+    <view class="weui-cell ">
+      <view class="weui-cell__hd">
+        <view class="weui-label">门牌号</view>
+      </view>
+      <view class="weui-cell__bd">
+        <input class="weui-input" placeholder="楼号/门牌号，如：4单元301" bindinput="data_Input" data-code="door" value="{{doorplate}}"/>
+      </view>
+    </view>
+    <view class="weui-cell ">
+      <view class="weui-cell__hd">
+        <view class="weui-label">联系人</view>
+      </view>
+      <view class="weui-cell__bd">
+        <input class="weui-input" placeholder="联系人姓名" bindinput="data_Input" data-code="name" value="{{name}}"/>
+      </view>
+    </view>
+    <view class="weui-cell weui-cell_select">
+      <view class="weui-cell__hd" style="width: 120px">
+        <picker bindchange="bindCountryCodeChange" value="{{countryCodeIndex}}" range="{{countryCodes}}">
+          <view class="weui-select">{{countryCodes[countryCodeIndex]}}</view>
+        </picker>
+      </view>
+      <view class="weui-cell__bd weui-cell__bd_in-select-before">
+        <input class="weui-input" placeholder="请输入号码" bindinput="data_Input" data-code="phone" value="{{phone}}"/>
+      </view>
+    </view>
+    <view class="bottom_button" bindtap="save_and_use">保存并使用</view>
+    <view class="bottom_button_delete" bindtap="delete_address">删除地址</view>
+  </view>
+</view>

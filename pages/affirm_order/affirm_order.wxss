@@ -98,7 +98,7 @@ page{
 .address_view .address_input{
   margin-left: 20rpx;
   flex: 1;
-  height: 80rpx;
+  min-height: 80rpx;
   display: flex;
   flex-direction: column;
   justify-content: center;

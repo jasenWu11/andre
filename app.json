@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/mine/mine",
     "pages/rule/rule",
     "pages/home/home",
     "pages/items/items",
@@ -9,7 +10,8 @@
     "pages/affirm_order/affirm_order",
     "pages/logs/logs",
     "component/wxzx-slider/wxzx-slider",
-    "component/wxzx-progress/wxzx-progress"
+    "component/wxzx-progress/wxzx-progress",
+    "pages/update_address/update_address"
   ],
   "window": {
     "backgroundTextStyle": "light",

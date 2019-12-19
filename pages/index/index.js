@@ -116,6 +116,10 @@ Page({
         console.log("返回结果" + JSON.stringify(res));
         var status = res.data.status;
         if (status == 0) {
+          var uname = res.data.data.username;
+          var ispass = res.data.data.ispass;
+          wx.setStorageSync('uname', uname);
+          wx.setStorageSync('ispass', ispass);
           if (res && res.header && res.header['Set-Cookie']) {
             wx.setStorageSync('cookieKey', res.header['Set-Cookie']); //保存Cookie到Storage
           }

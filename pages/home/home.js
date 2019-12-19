@@ -372,6 +372,9 @@ Page({
     var weight = this.data.weight;
     var type_id = this.data.typeid;
     console.log('种类是' + type_id + '重量是' + weight);
+    this.setData({
+      typeid: type_id
+    })
     this.toadd_order();
   },
   add_address: function (event) {
@@ -395,7 +398,7 @@ Page({
       start_info["latitude"] = this.data.start_latitude;
       start_info["longitude"] = this.data.start_longitude;
       var end_info = {}
-      start_info["id"] = this.data.end_id;
+      end_info["id"] = this.data.end_id;
       end_info["address"] = this.data.end_address;
       end_info["doorplate"] = this.data.end_doorplate;
       end_info["name"] = this.data.end_name;
@@ -407,7 +410,7 @@ Page({
       console.log('type_name其实是'+this.data.type_name+'距离是'+distance);
       setTimeout(function () {
         wx.navigateTo({
-          url: '/pages/affirm_order/affirm_order?weight=' + that.data.weight + '&weight_text=' + that.data.weight_text + '&typeid=' + that.data.typeid + '&typename=' + that.data.type_name + '&distance=' + distance + '&price=' + that.data.price,
+          url: '/pages/affirm_order/affirm_order?weight=' + that.data.weight + '&weight_text=' + that.data.weight_text + '&type_id=' + that.data.typeid + '&typename=' + that.data.type_name + '&distance=' + distance + '&price=' + that.data.price,
           success: function (res) { console.log(res) },
           fail: function (res) { console.log(res) },
           complete: function (res) { console.log(res) },
@@ -415,5 +418,10 @@ Page({
       }, 100)
       console.log('跳转');
     }
+  },
+  tomine:function(){
+    wx.navigateTo({
+      url: '../mine/mine'
+    })
   }
 })

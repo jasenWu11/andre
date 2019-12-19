@@ -3,7 +3,7 @@
 <view class="main_panel">
   <view class="title_panel">
     <view class="title_head_view">
-      <image class="title_head" src="/images/icons/head.png" mode="aspectFill"></image>
+      <image class="title_head" src="/images/icons/head.png" mode="aspectFill" bindtap="tomine"></image>
     </view>
     <text class="title_text">同城取送 1小时达</text>
     <view class="title_city">

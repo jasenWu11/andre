@@ -1,0 +1,7 @@
+/* pages/mine/mine.wxss */
+@import '/style/weui.wxss';
+page{
+  width: 100%;
+  height: 100%;
+  background-color: #eeeeee;
+}

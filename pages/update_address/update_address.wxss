@@ -1,0 +1,40 @@
+/* pages/update_address/update_address.wxss */
+@import '/style/weui.wxss';
+page {
+  width: 100%;
+  height: 100%;
+  background-color: #eeeeee;
+}
+
+.main_panel {
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 20rpx;
+  box-sizing: border-box;
+}
+
+.bottom_button{
+  width: 100;
+  height: 70rpx;
+  background-color: #f5c352;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20rpx 30rpx 0rpx 30rpx;
+  font-size: 28rpx;
+}
+
+.bottom_button_delete{
+  width: 100;
+  height: 70rpx;
+  background-color: #ffffff;
+  border: 0.5rpx;
+  border-style: solid;
+  border-color: #aaaaaa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 15rpx 30rpx 0rpx 30rpx;
+  font-size: 28rpx;
+}

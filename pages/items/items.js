@@ -73,20 +73,20 @@ Page({
   },
   getitem_type_list: function() {
     var that = this;
+    var item_type_list = item_type_data;
     wx.request({
       url: app.globalData.URL + '/common/category/list.do',
       method: 'get',
       dataType: 'json',
       data:{
-        "disable":0
+        "disabled":0
       },
       responseType: 'text',
       success: function (res) {
         console.log("返回结果" + JSON.stringify(res));
         var status = res.data.status;
         if (status == 0) {
-          var data = res.data.data.data;
-          var item_type_list = data;
+          item_type_list = res.data.data.data;
           for (var i = 0; i < item_type_list.length; i++) {
             var border = '2rpx solid #666666'
             var color = '#000000'
@@ -119,8 +119,8 @@ Page({
       if (item_type_list[i].id == iid) {
         item_type_list[i].border = "2rpx solid #f5c352";
         item_type_list[i].color = "#f5c352";
-        type_name = item_type_list[i].name;
-        price = item_type_list[i].price;
+        type_name = item_type_list[i].categoryname;
+        price = item_type_list[i].categoryprice;
       }
     }
     that.setData({

@@ -1,4 +1,5 @@
 // pages/address_list/address_list.js
+const app = getApp();
 var address_data = require("../../js/test.js").address_data;
 var type = 0;
 var start_id = '';
@@ -82,24 +83,47 @@ Page({
   getaddress_list: function() {
     console.log(type);
     var that = this;
-    var address_list = address_data;
-    for (var i = 0; i < address_list.length; i++) {
-      var ishidden = true;
-      if (type == 0) {
-        if (address_list[i].default_start == 1) {
-          that.toFirst(address_list, i);
+    wx.request({
+      url: app.globalData.URL + '/common/address/list.do',
+      method: 'get',
+      dataType: 'json',
+      header: {
+        'Content-Type': 'application/json',
+        'Cookie': wx.getStorageSync('cookieKey')
+      },
+      responseType: 'text',
+      success: function (res) {
+        console.log("返回结果" + JSON.stringify(res));
+        var status = res.data.status;
+        var address_datas = []
+        if (status == 0) {
+          var address_list = res.data.data;
+          for (var i = 0; i < address_list.length; i++) {
+            var ishidden = true;
+            if (type == 0) {
+              if (address_list[i].defaultstart == true) {
+                that.toFirst(address_list, i);
+              }
+            } else {
+              if (address_list[i].defaultend == true) {
+                that.toFirst(address_list, i);
+              }
+            }
+            address_list[i].ishidden = true;
+          }
+          address_list[0].ishidden = false;
+          console.log(JSON.stringify(address_list));
+          that.setData({
+            address_data: address_list
+          })
         }
-      } else {
-        if (address_list[i].default_end == 1) {
-          that.toFirst(address_list, i);
-        }
-      }
-      address_list[i].ishidden = true;
-    }
-    address_list[0].ishidden = false;
-    console.log(JSON.stringify(address_list));
-    that.setData({
-      address_data: address_list
+      },
+      fail: function (res) {
+        console.log("返回错误" + res);
+      },
+      complete: function (res) {
+        console.log("启动请求" + res);
+      },
     })
   },
   toFirst: function(fieldData, index) {    
@@ -114,10 +138,10 @@ Page({
     var address_list = that.data.address_data;
     for (var i = 0; i < address_list.length; i++) {
       if (type == 0) {
-        address_list[i].default_start = 0;
+        address_list[i].defaultstart = false;
         var ishidden = true;
         if (address_list[i].id == aid) {
-          address_list[i].default_start = 1;
+          address_list[i].defaultstart = true;
           start_id = address_list[i].id;
           start_address = address_list[i].address;
           start_doorplate = address_list[i].doorplate;
@@ -128,10 +152,10 @@ Page({
           that.toFirst(address_list, i);
         }
       } else {
-        address_list[i].default_end = 0;
+        address_list[i].defaultend = false;
         var ishidden = true;
         if (address_list[i].id == aid) {
-          address_list[i].default_end = 1;
+          address_list[i].defaultend = true;
           end_id = address_list[i].id;
           end_address = address_list[i].address;
           end_doorplate = address_list[i].doorplate;
@@ -185,6 +209,14 @@ Page({
   add_address:function(){
     wx.navigateTo({
       url: '../add_address/add_address?type=' + 2
+    })
+  },
+  to_update: function (event) {
+    var that = this;
+    var aid = event.currentTarget.dataset.aid;
+    console.log('aid是'+aid);
+    wx.navigateTo({
+      url: '../update_address/update_address?aid=' + aid
     })
   },
   setcoordinates:function(){

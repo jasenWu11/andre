@@ -35,7 +35,7 @@
       <view class="line"></view>
       <view class="time_view">
         <text class="address_text"> 取件时间</text>
-        <picker mode="date" value="{{date}}" start="{{start_date}}" end="{{end_date}}" bindchange="bindDateChange">
+        <picker mode="date" value="{{start_date}}" start="{{start_date}}" end="{{end_date}}" bindchange="bindDateChange">
           <view class="weui-input">{{start_date}}</view>
         </picker>
         <picker mode="time" value="{{time}}" start="00:00" end="23:59" bindchange="bindTimeChange">
@@ -81,6 +81,6 @@
       <text style="color:#ff0000;font-size:32rpx;margin-right:10rpx;">{{moneys}}</text>
       <image class="right_image" src="/images/icons/right.png"></image>
     </view>
-    <view class="button_view">提交订单</view>
+    <view class="button_view" bindtap="affirm">提交订单</view>
   </view>
 </view>

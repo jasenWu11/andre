@@ -1,4 +1,5 @@
 // pages/affirm_order/affirm_order.js
+const app = getApp();
 let QQMapWX = require('../../libs/qqmap-wx-jssdk.min.js');
 var latstart = '';
 var lngstart = '';
@@ -47,7 +48,7 @@ Page({
     distance_text: '',
     out_distance: '',
     out_weight: '',
-    out_time:''
+    out_time: ''
   },
 
   /**
@@ -268,9 +269,9 @@ Page({
   getmoneys: function(price, weight, distance) {
     var moneys = 6;
     distance = distance / 1000
-    var out_distance = '￥'+0
-    var out_weight = '￥'+0
-    var out_time = '￥'+0
+    var out_distance = '￥' + 0
+    var out_weight = '￥' + 0
+    var out_time = '￥' + 0
     if (distance <= 3) {
       moneys = moneys + distance * 1
       out_distance = '￥' + Math.ceil(distance * 1)
@@ -287,7 +288,7 @@ Page({
     }
     var out_mo = this.checkTime(['0:00', '06:00']);
     var out_ni = this.checkTime(['22:00', '24:00']);
-    if (out_mo == true){
+    if (out_mo == true) {
       moneys = moneys + 6;
       out_time = '￥' + 6;
     } else if (out_ni == true) {
@@ -321,7 +322,7 @@ Page({
       this.closeDialog();
     }
   },
-  checkTime:function (ar) {
+  checkTime: function(ar) {
     var d = new Date();
     var current = d.getHours() * 60 + d.getMinutes();
     var ar_begin = ar[0].split(':');
@@ -331,12 +332,63 @@ Page({
     if (current > b && current < e) return true;
     else return false;
   },
-  to_rule:function(){
+  to_rule: function() {
     wx.navigateTo({
       url: '../rule/rule',
       success: function(res) {},
       fail: function(res) {},
       complete: function(res) {},
+    })
+  },
+  affirm: function() {
+    var that = this;
+    var ordersenddate = that.data.start_date + ' ' + that.data.time + ':00';
+    var startaddressid = that.data.start_id;
+    var endaddressid = that.data.end_id;
+    var orderstate = 0;
+    var goodcategoryid = type_id;
+    var orderprice = that.data.moneys;
+    var ordertype = 0;
+    wx.request({
+      url: app.globalData.URL + '/order/create.do',
+      method: 'get',
+      dataType: 'json',
+      responseType: 'text',
+      header: {
+        'Cookie': wx.getStorageSync('cookieKey')
+      }, 
+      data:{
+        'ordersenddate': ordersenddate,
+        'startaddressid': startaddressid,
+        'endaddressid': endaddressid,
+        'orderstate': orderstate,
+        'goodcategoryid': goodcategoryid,
+        'orderprice': orderprice,
+        'ordertype': ordertype
+      },
+      success: function(res) {
+        console.log("返回结果" + JSON.stringify(res));
+        var status = res.data.status;
+        if (status == 0) {
+          
+        }
+      },
+      fail: function(res) {
+        console.log("返回错误" + res);
+      },
+      complete: function(res) {
+        console.log("启动请求" + res);
+      },
+    })
+  },
+  bindDateChange: function(e) {
+    this.setData({
+      start_date: e.detail.value
+    })
+  },
+  bindTimeChange: function(e) {
+    this.setData({
+      time: e.detail.value
     })
   }
 })
