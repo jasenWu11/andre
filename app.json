@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/order_list/order_list",
     "pages/index/index",
     "pages/mine/mine",
     "pages/rule/rule",

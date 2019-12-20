@@ -1,0 +1,79 @@
+/* pages/order_list/order_list.wxss */
+@import '/style/weui_nav.wxss';
+page,
+.page,
+.page__bd{
+  height: 100%;
+  background-color: #eeeeee;
+}
+.page__bd{
+    padding-bottom: 0;
+}
+
+.navbar_panel{
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-bottom:0px;
+  z-index:999;
+  background-color:#ffffff;
+  padding-bottom: 10rpx;
+}
+
+.order_list{
+  width: 100%;
+  height: 100%;
+  background-color: #eeeeee;
+  display: flex;
+  flex-direction: column;
+}
+
+.order_list .order_item{
+  width: 100%;
+  height: 150rpx;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  padding: 20rpx;
+  box-sizing: border-box;
+  margin-top: 20rpx;
+}
+
+.order_item .title_panel{
+  width: 100%;
+  display: flex;
+  padding: 0rpx 10rpx 10rpx 10rpx;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.title_panel .order_type_text{
+  height: 40rpx;
+  color: #ffffff;
+  background-color:#66ccffBD;
+  font-size: 24rpx;
+  padding: 0rpx 10rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.title_panel .item_type_text{
+  color: #000000;
+  font-size: 30rpx;
+  margin-left: 15rpx;
+  flex: 1;
+}
+
+.title_panel .status_text{
+  color:#f9c349;
+  font-size: 30rpx;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.line {
+  width: 100%;
+  height:1rpx;
+  border-bottom:1px dashed #acacac;
+}
