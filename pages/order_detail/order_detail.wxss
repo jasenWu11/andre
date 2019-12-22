@@ -1,0 +1,112 @@
+/* pages/order_detail/order_detail.wxss */
+page{
+  width: 100%;
+  height: 100%;
+  background-color: #eeeeee
+}
+
+.map_panel{
+  width: 100%;
+  height: 400rpx;
+}
+
+.content_panel{
+  margin: 30rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.content_panel .top_panel{
+  width: 100%;
+  height: 250rpx;
+  background-color: #ffffff;
+  padding: 30rpx;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.top_panel .status_text{
+  color: #000000;
+  font-size: 34rpx;
+}
+
+.time_text{
+  color: #888888;
+  font-size: 28rpx;
+}
+
+.top_panel .top_button{
+  width: 100%;
+  height: 70rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.top_button .cancel_button{
+  width: 25%;
+  height: 100%;
+  background-color: #ffffff;
+  color: #000000;
+  font-size: 28rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-width: 0.5rpx;
+  border-style: solid;
+  border-color: #aaaaaa;
+  margin-right: 12rpx;
+}
+
+.top_button .tip_button{
+  width: 32%;
+  height: 100%;
+  background-color: #f9c349;
+  color: #000000;
+  font-size: 28rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 12rpx;
+}
+
+.tip_button .small_tip_text{
+  color: #da7b10;
+  font-size: 22rpx;
+  margin-left: 5rpx;
+}
+
+.circle_line{
+  width: 100%;
+  height: 30rpx;
+  display: flex;
+  align-items: center;
+  background-color: #ffffff;
+}
+
+.circle_line .circle_view_left{
+  width: 20rpx;
+  height: 30rpx;
+  border-radius: 0 30rpx 30rpx 0;
+  background-color: #eeeeee;
+}
+
+.line {
+  flex: 1;
+  height: 1rpx;
+  border-bottom: 1px dashed #bbbbbb;
+  display: flex;
+  align-items: center;
+  margin: 0rpx 10rpx;
+}
+
+.circle_line .circle_view_right{
+  width: 20rpx;
+  height: 30rpx;
+  border-radius: 30rpx 0 0 30rpx;
+  background-color: #eeeeee;
+}

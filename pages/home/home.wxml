@@ -50,7 +50,7 @@
       <view class="address_input" bindtap='toitem_type'>
         <block wx:if="{{istype == 0}}">请选择要配送的物品信息</block>
         <block wx:else>
-         <text class="address_text"> {{type_name}}、{{weight_text}}公斤</text>
+          <text class="address_text"> {{type_name}}、{{weight_text}}公斤</text>
         </block>
       </view>
       <image class="address_next_image" src="/images/icons/right.png"></image>

@@ -1,0 +1,19 @@
+<!--pages/order_detail/order_detail.wxml-->
+<map id="myMap" class="map_panel" longitude="{{longitude}}" latitude="{{latitude}}" scale='{{scale}}' polyline="{{polyline}}" markers="{{markers}}" covers="{{covers}}" show-location></map>
+<view class="content_panel">
+  <view class="top_panel">
+    <text class="status_text">等待骑手接单></text>
+    <text class="time_text">正在为您寻找骑手，预计在<text style="color:#66ccff">9:50</text>内接单</text>
+    <view class="top_button">
+      <view class="cancel_button">取消订单</view>
+      <view class="tip_button">加小费
+        <text class="small_tip_text">接单更快</text>
+      </view>
+    </view>
+  </view>
+  <view class="circle_line">
+    <view class="circle_view_left"></view>
+    <view class="line"></view>
+    <view class="circle_view_right"></view>
+  </view>
+</view>

@@ -13,36 +13,283 @@
       <view class="weui-tab__panel" style="padding-top:40px;">
         <view class="weui-tab__content" hidden="{{activeIndex != 0}}" style="margin-bottom:40px;">
           <view class="order_list">
-            <view class="order_item">
-              <view class="title_panel">
-                <text class="order_type_text">取送件</text>
-                <text class="item_type_text">数码</text>
-                <text class="status_text">待接单</text>
+            <block wx:for="{{order_data}}" wx:key="item">
+              <view class="order_item" bindtap="to_detail" data-oid="{{item.order.id}}">
+                <view class="title_panel">
+                  <text class="order_type_text">取送件</text>
+                  <text class="item_type_text">{{item.order.categoryname}}</text>
+                  <text class="status_text">{{item.status_name}}</text>
+                </view>
+                <view class="line"></view>
+                <view class="address_view">
+                  <view class="address_circle"></view>
+                  <view class="address_input" bindinput='getStart' bindtap="add_address" data-type="0">
+                    <text class="address_text"> {{item.startAddress.address}} 
+                      <block wx:if="{{item.startAddress.details == 'null'}}">
+                        {{item.startAddress.details}}
+                      </block>
+                    </text>
+                    <text class="phone_text">{{item.startAddress.username}}  {{item.startAddress.phone}}</text>
+                  </view>
+                </view>
+                <view class="address_view">
+                  <view class="address_circle" style="background-color:#fb5e21"></view>
+                  <view class="address_input" bindinput='getEnd' bindtap="add_address" data-type="1">
+                    <text class="address_text"> {{item.endAddress.address}} 
+                      <block wx:if="{{item.startAddress.details == 'null'}}">
+                        {{item.startAddress.details}}
+                      </block></text>
+                    <text class="phone_text">{{item.endAddress.username}}  {{item.endAddress.phone}}</text>
+                  </view>
+                </view>
+                <view class="line"></view>
+                <view class="bottom_panel">
+                  <text>{{item.order.ordercreatedate}}</text>
+                  <view class="button_view">再来一单</view>
+                </view>
               </view>
-              <view class="line"></view>
-            </view>
+            </block>
           </view>
         </view>
         <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
-          告警
+          <view class="order_list">
+            <block wx:for="{{order_data_list.type0}}" wx:key="item">
+              <view class="order_item" bindtap="to_detail" data-oid="{{item.order.id}}">
+                <view class="title_panel">
+                  <text class="order_type_text">取送件</text>
+                  <text class="item_type_text">{{item.order.categoryname}}</text>
+                  <text class="status_text">{{item.status_name}}</text>
+                </view>
+                <view class="line"></view>
+                <view class="address_view">
+                  <view class="address_circle"></view>
+                  <view class="address_input" bindinput='getStart' bindtap="add_address" data-type="0">
+                    <text class="address_text"> {{item.startAddress.address}} 
+                      <block wx:if="{{item.startAddress.details == 'null'}}">
+                        {{item.startAddress.details}}
+                      </block>
+                    </text>
+                    <text class="phone_text">{{item.startAddress.username}}  {{item.startAddress.phone}}</text>
+                  </view>
+                </view>
+                <view class="address_view">
+                  <view class="address_circle" style="background-color:#fb5e21"></view>
+                  <view class="address_input" bindinput='getEnd' bindtap="add_address" data-type="1">
+                    <text class="address_text"> {{item.endAddress.address}} 
+                      <block wx:if="{{item.startAddress.details == 'null'}}">
+                        {{item.startAddress.details}}
+                      </block></text>
+                    <text class="phone_text">{{item.endAddress.username}}  {{item.endAddress.phone}}</text>
+                  </view>
+                </view>
+                <view class="line"></view>
+                <view class="bottom_panel">
+                  <text>{{item.order.ordercreatedate}}</text>
+                  <view class="button_view">再来一单</view>
+                </view>
+              </view>
+            </block>
+          </view>
         </view>
         <view class="weui-tab__content" hidden="{{activeIndex != 2}}">
-          告警
+          <view class="order_list">
+            <block wx:for="{{order_data_list.type1}}" wx:key="item">
+              <view class="order_item" bindtap="to_detail" data-oid="{{item.order.id}}">
+                <view class="title_panel">
+                  <text class="order_type_text">取送件</text>
+                  <text class="item_type_text">{{item.order.categoryname}}</text>
+                  <text class="status_text">{{item.status_name}}</text>
+                </view>
+                <view class="line"></view>
+                <view class="address_view">
+                  <view class="address_circle"></view>
+                  <view class="address_input" bindinput='getStart' bindtap="add_address" data-type="0">
+                    <text class="address_text"> {{item.startAddress.address}} 
+                      <block wx:if="{{item.startAddress.details == 'null'}}">
+                        {{item.startAddress.details}}
+                      </block>
+                    </text>
+                    <text class="phone_text">{{item.startAddress.username}}  {{item.startAddress.phone}}</text>
+                  </view>
+                </view>
+                <view class="address_view">
+                  <view class="address_circle" style="background-color:#fb5e21"></view>
+                  <view class="address_input" bindinput='getEnd' bindtap="add_address" data-type="1">
+                    <text class="address_text"> {{item.endAddress.address}} 
+                      <block wx:if="{{item.startAddress.details == 'null'}}">
+                        {{item.startAddress.details}}
+                      </block></text>
+                    <text class="phone_text">{{item.endAddress.username}}  {{item.endAddress.phone}}</text>
+                  </view>
+                </view>
+                <view class="line"></view>
+                <view class="bottom_panel">
+                  <text>{{item.order.ordercreatedate}}</text>
+                  <view class="button_view">再来一单</view>
+                </view>
+              </view>
+            </block>
+          </view>
         </view>
         <view class="weui-tab__content" hidden="{{activeIndex != 3}}">
-          告警
+          <view class="order_list">
+            <block wx:for="{{order_data_list.type2}}" wx:key="item">
+              <view class="order_item" bindtap="to_detail" data-oid="{{item.order.id}}">
+                <view class="title_panel">
+                  <text class="order_type_text">取送件</text>
+                  <text class="item_type_text">{{item.order.categoryname}}</text>
+                  <text class="status_text">{{item.status_name}}</text>
+                </view>
+                <view class="line"></view>
+                <view class="address_view">
+                  <view class="address_circle"></view>
+                  <view class="address_input" bindinput='getStart' bindtap="add_address" data-type="0">
+                    <text class="address_text"> {{item.startAddress.address}} 
+                      <block wx:if="{{item.startAddress.details == 'null'}}">
+                        {{item.startAddress.details}}
+                      </block>
+                    </text>
+                    <text class="phone_text">{{item.startAddress.username}}  {{item.startAddress.phone}}</text>
+                  </view>
+                </view>
+                <view class="address_view">
+                  <view class="address_circle" style="background-color:#fb5e21"></view>
+                  <view class="address_input" bindinput='getEnd' bindtap="add_address" data-type="1">
+                    <text class="address_text"> {{item.endAddress.address}} 
+                      <block wx:if="{{item.startAddress.details == 'null'}}">
+                        {{item.startAddress.details}}
+                      </block></text>
+                    <text class="phone_text">{{item.endAddress.username}}  {{item.endAddress.phone}}</text>
+                  </view>
+                </view>
+                <view class="line"></view>
+                <view class="bottom_panel">
+                  <text>{{item.order.ordercreatedate}}</text>
+                  <view class="button_view">再来一单</view>
+                </view>
+              </view>
+            </block>
+          </view>
         </view>
         <view class="weui-tab__content" hidden="{{activeIndex != 4}}">
-          告警
+          <view class="order_list">
+            <block wx:for="{{order_data_list.type3}}" wx:key="item">
+              <view class="order_item" bindtap="to_detail" data-oid="{{item.order.id}}">
+                <view class="title_panel">
+                  <text class="order_type_text">取送件</text>
+                  <text class="item_type_text">{{item.order.categoryname}}</text>
+                  <text class="status_text">{{item.status_name}}</text>
+                </view>
+                <view class="line"></view>
+                <view class="address_view">
+                  <view class="address_circle"></view>
+                  <view class="address_input" bindinput='getStart' bindtap="add_address" data-type="0">
+                    <text class="address_text"> {{item.startAddress.address}} 
+                      <block wx:if="{{item.startAddress.details == 'null'}}">
+                        {{item.startAddress.details}}
+                      </block>
+                    </text>
+                    <text class="phone_text">{{item.startAddress.username}}  {{item.startAddress.phone}}</text>
+                  </view>
+                </view>
+                <view class="address_view">
+                  <view class="address_circle" style="background-color:#fb5e21"></view>
+                  <view class="address_input" bindinput='getEnd' bindtap="add_address" data-type="1">
+                    <text class="address_text"> {{item.endAddress.address}} 
+                      <block wx:if="{{item.startAddress.details == 'null'}}">
+                        {{item.startAddress.details}}
+                      </block></text>
+                    <text class="phone_text">{{item.endAddress.username}}  {{item.endAddress.phone}}</text>
+                  </view>
+                </view>
+                <view class="line"></view>
+                <view class="bottom_panel">
+                  <text>{{item.order.ordercreatedate}}</text>
+                  <view class="button_view">再来一单</view>
+                </view>
+              </view>
+            </block>
+          </view>
         </view>
         <view class="weui-tab__content" hidden="{{activeIndex != 5}}">
-          告警
+          <view class="order_list">
+            <block wx:for="{{order_data_list.type4}}" wx:key="item">
+              <view class="order_item" bindtap="to_detail" data-oid="{{item.order.id}}">
+                <view class="title_panel">
+                  <text class="order_type_text">取送件</text>
+                  <text class="item_type_text">{{item.order.categoryname}}</text>
+                  <text class="status_text">{{item.status_name}}</text>
+                </view>
+                <view class="line"></view>
+                <view class="address_view">
+                  <view class="address_circle"></view>
+                  <view class="address_input" bindinput='getStart' bindtap="add_address" data-type="0">
+                    <text class="address_text"> {{item.startAddress.address}} 
+                      <block wx:if="{{item.startAddress.details == 'null'}}">
+                        {{item.startAddress.details}}
+                      </block>
+                    </text>
+                    <text class="phone_text">{{item.startAddress.username}}  {{item.startAddress.phone}}</text>
+                  </view>
+                </view>
+                <view class="address_view">
+                  <view class="address_circle" style="background-color:#fb5e21"></view>
+                  <view class="address_input" bindinput='getEnd' bindtap="add_address" data-type="1">
+                    <text class="address_text"> {{item.endAddress.address}} 
+                      <block wx:if="{{item.startAddress.details == 'null'}}">
+                        {{item.startAddress.details}}
+                      </block></text>
+                    <text class="phone_text">{{item.endAddress.username}}  {{item.endAddress.phone}}</text>
+                  </view>
+                </view>
+                <view class="line"></view>
+                <view class="bottom_panel">
+                  <text>{{item.order.ordercreatedate}}</text>
+                  <view class="button_view">再来一单</view>
+                </view>
+              </view>
+            </block>
+          </view>
         </view>
         <view class="weui-tab__content" hidden="{{activeIndex != 6}}">
-          运行情况
-        </view>
-        <view class="weui-tab__content" hidden="{{activeIndex != 7}}">
-          运行情况
+          <view class="order_list">
+            <block wx:for="{{order_data_list.type5}}" wx:key="item">
+              <view class="order_item" bindtap="to_detail" data-oid="{{item.order.id}}">
+                <view class="title_panel">
+                  <text class="order_type_text">取送件</text>
+                  <text class="item_type_text">{{item.order.categoryname}}</text>
+                  <text class="status_text">{{item.status_name}}</text>
+                </view>
+                <view class="line"></view>
+                <view class="address_view">
+                  <view class="address_circle"></view>
+                  <view class="address_input" bindinput='getStart' bindtap="add_address" data-type="0">
+                    <text class="address_text"> {{item.startAddress.address}} 
+                      <block wx:if="{{item.startAddress.details == 'null'}}">
+                        {{item.startAddress.details}}
+                      </block>
+                    </text>
+                    <text class="phone_text">{{item.startAddress.username}}  {{item.startAddress.phone}}</text>
+                  </view>
+                </view>
+                <view class="address_view">
+                  <view class="address_circle" style="background-color:#fb5e21"></view>
+                  <view class="address_input" bindinput='getEnd' bindtap="add_address" data-type="1">
+                    <text class="address_text"> {{item.endAddress.address}} 
+                      <block wx:if="{{item.startAddress.details == 'null'}}">
+                        {{item.startAddress.details}}
+                      </block></text>
+                    <text class="phone_text">{{item.endAddress.username}}  {{item.endAddress.phone}}</text>
+                  </view>
+                </view>
+                <view class="line"></view>
+                <view class="bottom_panel">
+                  <text>{{item.order.ordercreatedate}}</text>
+                  <view class="button_view">再来一单</view>
+                </view>
+              </view>
+            </block>
+          </view>
         </view>
       </view>
     </view>

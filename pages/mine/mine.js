@@ -74,5 +74,13 @@ Page({
       picurl: picurl,
       sno: sno
     })
+  },
+  to_myorder:function(){
+    wx.navigateTo({
+      url: '../order_list/order_list',
+      success: function (res) { },
+      fail: function (res) { },
+      complete: function (res) { },
+    })
   }
 })
