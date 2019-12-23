@@ -1,0 +1,15 @@
+<!--pages/service_ introduced/service_ introduced.wxml-->
+<view class="text_panel">
+  <text class="title_text">1.跑腿代购是什么？</text>
+  <text class="content_text">跑腿代购服务包含代购和取送件。</text>
+  <text class="content_text">代购服务，可以让骑手帮忙购买周边商品，不限品类。例如：小吃、奶茶、咖啡、水果等。骑手接单后1小时内送货上门。</text>
+  <text class="content_text">取送件服务，可以给同城亲友、同事、合作伙伴递送文件、鲜花、蛋糕等物品，由平台认证的骑手进行配送，专业安全无中转，1小时送达。</text>
+  <text class="title_text">2.代购怎么用？</text>
+  <text class="content_text">根据页面提示填写商品要求、购买地址、送货地址等信息，在线支付配送费后，骑手根据您填写的商品要求，到指定或附近商家购买商品。购买成功后1小时内送货上门，为保障您的资金安全，请使用平台在线支付商品费，请勿通过微信、支付宝等方式直接给骑手转账。具体流程：骑手代购后，会填写商品金额并发起在线支付，您进入当前订单页面可在线支付商品费。若您的APP版本不支持在线支付，建议您在骑手送货后确认货品质量和价格无误后，线下将商品费付给骑手。</text>
+  <text class="title_text">3.取送件怎么用？</text>
+  <text class="content_text">根据页面提示填写发货地址、送货地址等信息，在线支付配送费后，由平台认证骑手上门取件，配送过程专业安全无中转，同城1小时内送达。</text>
+    <text class="title_text">4.怎么收费？</text>
+  <text class="content_text">按配送距离计费（不同地区计费标准以产品公示为准）。</text>
+    <text class="title_text">5.服务有保障么？</text>
+  <text class="content_text">跑腿代购由专门团队运营，已在全国范围内开通80个城市。所有骑手经过认证培训，为用户提供安全、专业、有保障的服务。</text>
+</view>

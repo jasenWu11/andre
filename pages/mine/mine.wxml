@@ -34,25 +34,25 @@
     <view class="weui-cell__bd">开具发票</view>
     <view class="weui-cell__ft weui-cell__ft_in-access"></view>
   </view>
-  <view url="" class="weui-cell weui-cell_example weui-cell_access" hover-class="weui-cell_active">
+  <view bindtap="to_setting" class="weui-cell weui-cell_example weui-cell_access" hover-class="weui-cell_active">
     <view class="weui-cell__hd">
       <image src="/images/icons/setting.png" style="margin-right: 16px;vertical-align: middle;width:20px; height: 20px;"></image>
     </view>
     <view class="weui-cell__bd">设置</view>
     <view class="weui-cell__ft weui-cell__ft_in-access"></view>
   </view>
-  <view url="" class="weui-cell weui-cell_example weui-cell_access" hover-class="weui-cell_active">
+  <view bindtap="call_service" class="weui-cell weui-cell_example weui-cell_access" hover-class="weui-cell_active">
     <view class="weui-cell__hd">
       <image src="/images/icons/contact.png" style="margin-right: 16px;vertical-align: middle;width:20px; height: 20px;"></image>
     </view>
     <view class="weui-cell__bd">联系客服</view>
     <view class="weui-cell__ft weui-cell__ft_in-access"></view>
   </view>
-  <view url="" class="weui-cell weui-cell_example weui-cell_access" hover-class="weui-cell_active">
+  <button open-type="contact" session-from="weapp" hover-class="btn-hover"  class=" none-btn weui-cell weui-cell_example weui-cell_access" hover-class="weui-cell_active" style=" background-color:#ffffff;font-weight:400;width:100%;text-align:left">
     <view class="weui-cell__hd">
       <image src="/images/icons/feedback.png" style="margin-right: 16px;vertical-align: middle;width:20px; height: 20px;"></image>
     </view>
     <view class="weui-cell__bd">意见反馈</view>
     <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-  </view>
+  </button>
 </view>

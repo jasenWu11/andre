@@ -1,0 +1,24 @@
+/* pages/service_ introduced/service_ introduced.wxss */
+page{
+  width: 100%;
+  height: 100%;
+}
+.text_panel{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 30rpx;
+  box-sizing: border-box;
+}
+.title_text{
+  color: #000000;
+  font-weight: 600;
+  margin-bottom: 40rpx;
+}
+
+.content_text{
+  color: #000000;
+  font-weight: 400;
+  margin-bottom: 30rpx;
+}

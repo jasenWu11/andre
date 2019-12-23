@@ -1,0 +1,19 @@
+<!--pages/privacy_agreement/privacy_agreement.wxml-->
+<view class="text_panel">
+  <text class="content_text">更新日期：2018年10月29日</text>
+  <text class="content_text">生效日期：2018年10月29日</text>
+  <text class="content_text">跑腿APP（以下或称“我们”）非常注重保护用户（“您”）的个人信息及隐私，我们深知个人信息对您的重要性，并将按照法律法规要求和业界成熟的安全标准，采取相应的安全保护措施来保护您的个人信息。我们希望通过本隐私政策向您清晰地介绍在使用我们的产品\服务时，我们如何处理您的个人信息，以及我们为您提供的访问、更正、删除和保护这些信息的方式。</text>
+   <text class="content_text">本政策将帮助您了解以下内容：</text>
+   <text class="content_text" style="margin-left:30rpx">1.<text class="content_list_text">我们如何收集和使用您的个人信息；</text></text>
+   <text class="content_text" style="margin-left:30rpx">2.<text class="content_list_text">我们如何使用 Cookie 和同类技术；</text></text>
+   <text class="content_text" style="margin-left:30rpx">3.<text class="content_list_text">我们如何共享、转让、公开您的信息；</text></text>
+   <text class="content_text" style="margin-left:30rpx">4.<text class="content_list_text">我们如何保存和保护您的个人信息；</text></text>
+   <text class="content_text" style="margin-left:30rpx">5.<text class="content_list_text">您如何管理您的个人信息；；</text></text>
+   <text class="content_text" style="margin-left:30rpx">6.<text class="content_list_text">未成年人的个人信息保护；</text></text>
+   <text class="content_text" style="margin-left:30rpx">7.<text class="content_list_text">通知和修订；</text></text>
+   <text class="content_text" style="margin-left:30rpx">8.<text class="content_list_text">如何联系我们；</text></text>
+   <text class="content_text" style="margin-left:30rpx">9.<text class="content_list_text">附录。</text></text>
+   <text class="content_text" >【特别提示】请您在使用我们提供的各项产品\服务前，仔细阅读并充分理解本《隐私政策》（重点内容我们已将字体加粗请您特别关注）并作出相应选择。一旦您使用或继续使用我们的产品\服务时，即意味着您同意我们按照本隐私政策处理您的相关信息。
+如对本隐私政策有任何疑问，您可以通过跑腿APP网站（如https://www.meituan.com、http://www.dianping.com等）\App上提供的联系方式\客服系统与我们联系。
+跑腿APP所有的产品\服务（包括跑腿APP提供的产品\服务及未设独立隐私政策的跑腿APP关联方提供的产品\服务）均适用本隐私政策。</text>
+</view>

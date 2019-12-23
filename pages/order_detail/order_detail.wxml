@@ -16,4 +16,67 @@
     <view class="line"></view>
     <view class="circle_view_right"></view>
   </view>
+  <view class="runner_panle">
+    <image class="runner_head" src="/images/icons/runner_head.png"></image>
+    <view class="info_panel">
+      <view class="name_view">
+        丘师傅
+        <view class="panle_view">优质跑腿</view>
+      </view>
+      <text class="eval_text">满意度：83%</text>
+    </view>
+    <image class="call_image" src="/images/icons/runner_call.png" bindtap="call_runner"></image>
+  </view>
+
+  <view class="address_panel" style="margin-top: 25rpx;">
+    <view class="address_view">
+      <text class="order_type_text">取送件</text>
+      <view class="address_input" bindtap='toitem_type'>
+        <text class="address_text"> {{type_name}} | {{weight_text}}公斤</text>
+      </view>
+    </view>
+  </view>
+  <view class="circle_line">
+    <view class="circle_view_left"></view>
+    <view class="line"></view>
+    <view class="circle_view_right"></view>
+  </view>
+  <view class="address_panel">
+    <view class="address_view">
+      <view class="address_circle"></view>
+      <view class="address_input" bindinput='getStart' bindtap="add_address" data-type="0">
+        <text class="address_text"> {{start_address}} {{start_doorplate}}</text>
+        <text class="phone_text">{{start_name}}  {{start_phone}}</text>
+      </view>
+    </view>
+    <view class="address_view">
+      <view class="address_circle" style="background-color:#fb5e21"></view>
+      <view class="address_input" bindinput='getEnd' bindtap="add_address" data-type="1">
+        <text class="address_text"> {{end_address}} {{end_doorplate}}</text>
+        <text class="phone_text">{{end_name}}  {{end_phone}}</text>
+      </view>
+    </view>
+  </view>
+  <view class="circle_line">
+    <view class="circle_view_left"></view>
+    <view class="line"></view>
+    <view class="circle_view_right"></view>
+  </view>
+  <view class="address_panel">
+    <view class="address_view">
+      <text class="price_tip_text">跑腿费</text>
+      <text class="price_text">￥14</text>
+    </view>
+  </view>
+  <view class="address_panel" style="margin:25rpx 0rpx;">
+    <view class="address_view">
+      <text class="bottom_view_tip_text">订单号码</text>
+      <text class="bottom_view_content_text">{{order_id}}</text>
+      <view class="buttom_copy_button" bindtap='textPaste'>复制</view>
+    </view>
+    <view class="address_view">
+      <text class="bottom_view_tip_text">下单时间</text>
+      <text class="bottom_view_content_text">2019-12-18 21:41:55</text>
+    </view>
+  </view>
 </view>

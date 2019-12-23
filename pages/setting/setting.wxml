@@ -1,0 +1,16 @@
+<!--pages/setting/setting.wxml-->
+<view class="weui-cells weui-cells_after-title" style="margin-top:15rpx;">
+  <view bindtap="service_introduced" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+    <view class="weui-cell__hd">
+    </view>
+    <view class="weui-cell__bd">服务介绍</view>
+    <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+  </view>
+  <view bindtap="agreement" class="weui-cell weui-cell_example weui-cell_access" hover-class="weui-cell_active">
+    <view class="weui-cell__hd">
+    </view>
+    <view class="weui-cell__bd">用户协议</view>
+    <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+  </view>
+</view>
+<view class="logout_button" bindtap="to_logout">退出登录</view>

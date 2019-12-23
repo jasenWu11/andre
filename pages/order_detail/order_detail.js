@@ -15,7 +15,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    order_id: '2667794103135985',
+    runner_phone:'15625527284'
   },
 
   /**
@@ -150,4 +151,32 @@ Page({
     };
     wx.request(opt);
   },
+  textPaste:function() {
+    wx.showToast({
+      title: '复制成功',
+    })
+    wx.setClipboardData({
+      data: this.data.order_id,
+      success: function (res) {
+        wx.getClipboardData({
+          //这个api是把拿到的数据放到电脑系统中的
+          success: function(res) {
+            console.log(res.data) // data
+          }
+        })
+      }
+    })
+  },
+  call_runner: function () {
+    console.log('拨打电话')
+    wx.makePhoneCall({
+      phoneNumber: this.data.runner_phone,
+      success: function () {
+        console.log("拨打电话成功！")
+      },
+      fail: function () {
+        console.log("拨打电话失败！")
+      }
+    })
+  }
 })

@@ -1,0 +1,16 @@
+/* pages/setting/setting.wxss */
+@import '/style/weui.wxss';
+page{
+  width: 100%;
+  height: 100%;
+  background-color: #eeeeee;
+}
+.logout_button{
+  width: 100%;
+  height: 90rpx;
+  background-color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30rpx;
+}

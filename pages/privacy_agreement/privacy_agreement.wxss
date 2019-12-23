@@ -1,0 +1,24 @@
+/* pages/privacy_agreement/privacy_agreement.wxss */
+page{
+  width: 100%;
+  height: 100%;
+}
+.text_panel{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 30rpx;
+  box-sizing: border-box;
+}
+.content_text{
+  font-size: 32rpx;
+  margin-bottom: 15rpx;
+}
+
+.content_list_text{
+  font-size: 32rpx;
+  margin-bottom: 15rpx;
+  text-decoration:underline;
+  margin-left: 10rpx;
+}
