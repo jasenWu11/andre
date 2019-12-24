@@ -1,12 +1,12 @@
 {
   "pages": [
+    "pages/order_detail/order_detail",
     "pages/mine/mine",
     "pages/runner_agreement/runner_agreement",
     "pages/agreement/agreement",
     "pages/privacy_agreement/privacy_agreement",
     "pages/service_introduced/service_introduced",
     "pages/setting/setting",
-    "pages/order_detail/order_detail",
     "pages/index/index",
     "pages/order_list/order_list",
     "pages/rule/rule",

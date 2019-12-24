@@ -1,4 +1,5 @@
 /* pages/order_detail/order_detail.wxss */
+@import '/style/weui.wxss';
 page{
   width: 100%;
   height: 100%;
@@ -319,3 +320,50 @@ page{
   justify-content: center;
   align-items: center;
 }
+.evaluation_tip{
+  height: 80rpx;
+  color:#000000;
+  font-size: 34rpx;
+  font-weight: 500;
+  display: flex;
+  flex: 1;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.star_panel{
+  display: flex;
+  flex-direction: row;
+  width: 80%;
+  align-items: center;
+  justify-content: space-between;
+  margin: 15rpx 0rpx 20rpx 0rpx;
+}
+
+.star_view{
+  width: 70rpx;
+  height: 70rpx;
+}
+
+.weui-demo-dialog{
+  visibility:hidden;
+  opacity:0;
+}
+.weui-half-screen-dialog{
+  transition:all .3s;
+  transform:translateY(100%);
+}
+.weui-demo-dialog_show{
+  visibility:visible;
+  opacity:1;
+}
+.weui-demo-dialog_show .weui-half-screen-dialog{
+    transform:translateY(0);
+}
+.center_view{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+

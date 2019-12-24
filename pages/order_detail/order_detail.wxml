@@ -27,7 +27,16 @@
     </view>
     <image class="call_image" src="/images/icons/runner_call.png" bindtap="call_runner"></image>
   </view>
-
+  <view class="address_panel" style="margin-top:25rpx;">
+    <view class="address_view">
+      <text class="evaluation_tip">您的评价会让跑腿者做的更好</text>
+    </view>
+    <view class="star_panel">
+      <block wx:for="{{star_data}}" wx:key="item">
+        <image class="star_view" src="{{item.src}}" data-sid="{{item.id}}" bindtap="change_star"></image>
+      </block>
+    </view>
+  </view>
   <view class="address_panel" style="margin-top: 25rpx;">
     <view class="address_view">
       <text class="order_type_text">取送件</text>
@@ -77,6 +86,38 @@
     <view class="address_view">
       <text class="bottom_view_tip_text">下单时间</text>
       <text class="bottom_view_content_text">2019-12-18 21:41:55</text>
+    </view>
+  </view>
+  <view class="weui-demo-dialog {{istrue ? 'weui-demo-dialog_show' : ''}}">
+    <view class="weui-mask" bindtap="closeDialog"></view>
+    <view class="weui-half-screen-dialog" catchtap="stopEvent">
+      <view class="weui-half-screen-dialog__hd">
+        <view class="weui-half-screen-dialog__hd__side">
+          <view bindtap="closeDialog" class="weui-icon-btn weui-icon-btn_close">关闭</view>
+        </view>
+        <view class="weui-half-screen-dialog__hd__main">
+          <text class="weui-half-screen-dialog__title">评价跑者</text>
+          <text class="weui-half-screen-dialog__subtitle">请如实评价</text>
+        </view>
+      </view>
+      <view class="weui-half-screen-dialog__bd center_view">
+        <view class="star_panel">
+          <block wx:for="{{star_data}}" wx:key="item">
+            <image class="star_view" src="{{item.src}}" data-sid="{{item.id}}" bindtap="change_star"></image>
+          </block>
+        </view>
+        <view class="weui-cells weui-cells_after-title" style="width:100%;">
+          <view class="weui-cell">
+            <view class="weui-cell__bd">
+              <textarea class="weui-textarea" placeholder="请输入评价内容" style="height: 3.3em" bindinput="data_Input"/>
+              <view class="weui-textarea-counter">0/200</view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="weui-half-screen-dialog__ft">
+        <button type="primary" class="weui-btn" bindtap="affirm_evaluation">提交评价</button>
+      </view>
     </view>
   </view>
 </view>
