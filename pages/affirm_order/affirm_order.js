@@ -364,13 +364,31 @@ Page({
         'orderstate': orderstate,
         'goodcategoryid': goodcategoryid,
         'orderprice': orderprice,
-        'ordertype': ordertype
+        'ordertype': ordertype,
+        'weight': weight
       },
       success: function(res) {
         console.log("返回结果" + JSON.stringify(res));
         var status = res.data.status;
         if (status == 0) {
-          
+          var order_id = res.data.data
+          wx.navigateTo({
+            url: '../order_detail/order_detail?order_id=' + order_id,
+            success: function (res) { },
+            fail: function (res) { },
+            complete: function (res) { },
+          })
+        }else{
+          var msg = res.data.msg;
+          wx.showToast({
+            title: msg,
+            image: '/images/icons/wrong.png',
+            duration: 0,
+            mask: true,
+            success: function(res) {},
+            fail: function(res) {},
+            complete: function(res) {},
+          })
         }
       },
       fail: function(res) {

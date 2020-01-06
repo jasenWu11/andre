@@ -8,7 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    tabs: ["全部", "待支付", "待接单", "待送达", "已完成", "待评价", "已取消"],
+    tabs: ["全部", "待支付", "待接单", "待送达", "待评价", "已完成", "已取消"],
     activeIndex : 0,
     order_data:[],
     order_data_list:{}
@@ -145,8 +145,10 @@ Page({
         if (status == 0) {
           var types = 'type'+type;
           order_data_list[types] = res.data.data.data;
-          for (var i = 0; i < order_data_list[types].length; i++) {
-            order_data_list[types][i]['status_name'] = that.data.tabs[i + 1]
+          if (order_data_list[types]!=null){
+            for (var i = 0; i < order_data_list[types].length; i++) {
+              order_data_list[types][i]['status_name'] = that.data.tabs[type + 1]
+            }
           }
           console.log(JSON.stringify(order_data_list));
           that.setData({
@@ -160,6 +162,16 @@ Page({
       complete: function (res) {
         console.log("启动请求" + res);
       },
+    })
+  }, 
+  to_detail: function (event) {
+    var that = this;
+    var oid = event.currentTarget.dataset.oid;
+    wx.navigateTo({
+      url: '../order_detail/order_detail?order_id='+oid,
+      success: function(res) {},
+      fail: function(res) {},
+      complete: function(res) {},
     })
   }
 })

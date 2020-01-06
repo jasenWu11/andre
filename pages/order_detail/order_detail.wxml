@@ -2,7 +2,7 @@
 <map id="myMap" class="map_panel" longitude="{{longitude}}" latitude="{{latitude}}" scale='{{scale}}' polyline="{{polyline}}" markers="{{markers}}" covers="{{covers}}" show-location></map>
 <view class="content_panel">
   <view class="top_panel">
-    <text class="status_text">等待骑手接单></text>
+    <text class="status_text">{{state_text}}></text>
     <text class="time_text">正在为您寻找骑手，预计在<text style="color:#66ccff">9:50</text>内接单</text>
     <view class="top_button">
       <view class="cancel_button">取消订单</view>
@@ -11,23 +11,23 @@
       </view>
     </view>
   </view>
-  <view class="circle_line">
+  <view class="circle_line" hidden="{{hiddrunner}}">
     <view class="circle_view_left"></view>
     <view class="line"></view>
     <view class="circle_view_right"></view>
   </view>
-  <view class="runner_panle">
+  <view class="runner_panle" hidden="{{hiddrunner}}">
     <image class="runner_head" src="/images/icons/runner_head.png"></image>
     <view class="info_panel">
       <view class="name_view">
-        丘师傅
-        <view class="panle_view">优质跑腿</view>
+        {{rnickname}}
+        <view class="panle_view">{{satisfact_text}}</view>
       </view>
-      <text class="eval_text">满意度：83%</text>
+      <text class="eval_text">满意度：{{satisfaction}}%</text>
     </view>
     <image class="call_image" src="/images/icons/runner_call.png" bindtap="call_runner"></image>
   </view>
-  <view class="address_panel" style="margin-top:25rpx;">
+  <view class="address_panel" style="margin-top:25rpx;" hidden="{{hiddevaluate}}">
     <view class="address_view">
       <text class="evaluation_tip">您的评价会让跑腿者做的更好</text>
     </view>
@@ -74,17 +74,21 @@
   <view class="address_panel">
     <view class="address_view">
       <text class="price_tip_text">跑腿费</text>
-      <text class="price_text">￥14</text>
+      <text class="price_text"><text style="color:#999999;">{{resultDistance}}</text>    ￥{{price}}</text>
     </view>
   </view>
   <view class="address_panel" style="margin:25rpx 0rpx;">
     <view class="address_view">
       <text class="bottom_view_tip_text">订单号码</text>
-      <text class="bottom_view_content_text">{{order_id}}</text>
+      <text class="bottom_view_content_text">{{o_id}}</text>
       <view class="buttom_copy_button" bindtap='textPaste'>复制</view>
     </view>
     <view class="address_view">
       <text class="bottom_view_tip_text">下单时间</text>
+      <text class="bottom_view_content_text">{{creat_time}}</text>
+    </view>
+    <view class="address_view">
+      <text class="bottom_view_tip_text">约定送达</text>
       <text class="bottom_view_content_text">2019-12-18 21:41:55</text>
     </view>
   </view>

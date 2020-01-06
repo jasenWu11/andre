@@ -98,20 +98,22 @@ Page({
         var address_datas = []
         if (status == 0) {
           var address_list = res.data.data;
-          for (var i = 0; i < address_list.length; i++) {
-            var ishidden = true;
-            if (type == 0) {
-              if (address_list[i].defaultstart == true) {
-                that.toFirst(address_list, i);
+          if (address_list.length>0){
+            for (var i = 0; i < address_list.length; i++) {
+              var ishidden = true;
+              if (type == 0) {
+                if (address_list[i].defaultstart == true) {
+                  that.toFirst(address_list, i);
+                }
+              } else {
+                if (address_list[i].defaultend == true) {
+                  that.toFirst(address_list, i);
+                }
               }
-            } else {
-              if (address_list[i].defaultend == true) {
-                that.toFirst(address_list, i);
-              }
+              address_list[i].ishidden = true;
             }
-            address_list[i].ishidden = true;
+            address_list[0].ishidden = false;
           }
-          address_list[0].ishidden = false;
           console.log(JSON.stringify(address_list));
           that.setData({
             address_data: address_list
@@ -145,7 +147,7 @@ Page({
           start_id = address_list[i].id;
           start_address = address_list[i].address;
           start_doorplate = address_list[i].doorplate;
-          start_name = address_list[i].name;
+          start_name = address_list[i].username;
           start_phone = address_list[i].phone;
           start_latitude = address_list[i].latitude;
           start_longitude = address_list[i].longitude;
@@ -159,7 +161,7 @@ Page({
           end_id = address_list[i].id;
           end_address = address_list[i].address;
           end_doorplate = address_list[i].doorplate;
-          end_name = address_list[i].name;
+          end_name = address_list[i].username;
           end_phone = address_list[i].phone;
           end_latitude = address_list[i].latitude;
           end_longitude = address_list[i].longitude;
