@@ -1,4 +1,4 @@
-/* pages/order_list/order_list.wxss */
+
 @import '/style/weui_nav.wxss';
 
 page, .page, .page__bd {
@@ -125,11 +125,16 @@ page, .page, .page__bd {
   box-sizing: border-box;
   margin-top: 20rpx;
   flex: 1;
-  justify-content: space-between;
+}
+
+.bottom_panel .send_time_text{
+  display: flex;
+  align-items: center;
+  flex: 1;
 }
 
 .bottom_panel .button_view {
-  width: 150rpx;
+  width: 120rpx;
   height: 50rpx;
   background-color: #f9c349;
   color: #000;

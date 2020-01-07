@@ -118,8 +118,12 @@ Page({
         if (status == 0) {
           var uname = res.data.data.username;
           var ispass = res.data.data.ispass;
+          var disable = res.data.data.disable;
           wx.setStorageSync('uname', uname);
           wx.setStorageSync('ispass', ispass);
+          wx.setStorageSync('disable', disable);
+          wx.setStorageSync('latitude', latitude);
+          wx.setStorageSync('longitude', longitude);
           if (res && res.header && res.header['Set-Cookie']) {
             wx.setStorageSync('cookieKey', res.header['Set-Cookie']); //保存Cookie到Storage
           }

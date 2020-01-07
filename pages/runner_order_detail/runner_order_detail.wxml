@@ -1,13 +1,13 @@
-<!--pages/order_detail/order_detail.wxml-->
+<!--pages/runner_order_detail/runner_order_detail.wxml-->
 <map id="myMap" class="map_panel" longitude="{{longitude}}" latitude="{{latitude}}" scale='{{scale}}' polyline="{{polyline}}" markers="{{markers}}" covers="{{covers}}" show-location></map>
 <view class="content_panel">
   <view class="top_panel">
     <text class="status_text">{{state_text}}></text>
-    <text class="time_text">正在为您寻找骑手，预计在<text style="color:#66ccff">9:50</text>内接单</text>
+    <text class="time_text">请在约定时间( <text style="color:#66ccff">{{send_time}}</text> )内送达</text>
     <view class="top_button">
-      <view class="cancel_button">取消订单</view>
-      <view class="tip_button">加小费
-        <text class="small_tip_text">接单更快</text>
+      <view class="cancel_button" style="display:none">取消接单</view>
+      <view class="tip_button">下一步
+        <text class="small_tip_text">{{next_text}}</text>
       </view>
     </view>
   </view>
@@ -26,16 +26,6 @@
       <text class="eval_text">满意度：{{satisfaction}}%</text>
     </view>
     <image class="call_image" src="/images/icons/runner_call.png" bindtap="call_runner"></image>
-  </view>
-  <view class="address_panel" style="margin-top:25rpx;" hidden="{{hiddevaluate}}">
-    <view class="address_view">
-      <text class="evaluation_tip">您的评价会让跑腿者做的更好</text>
-    </view>
-    <view class="star_panel">
-      <block wx:for="{{star_data}}" wx:key="item">
-        <image class="star_view" src="{{item.src}}" data-sid="{{item.id}}" bindtap="change_star"></image>
-      </block>
-    </view>
   </view>
   <view class="address_panel" style="margin-top: 25rpx;">
     <view class="address_view">
@@ -121,6 +111,22 @@
       </view>
       <view class="weui-half-screen-dialog__ft">
         <button type="primary" class="weui-btn" bindtap="affirm_evaluation">提交评价</button>
+      </view>
+    </view>
+  </view><view class="weui-demo-dialog {{bangtrue ? 'weui-demo-dialog_show' : ''}}">
+    <view class="weui-mask" bindtap="closebangDialog"></view>
+    <view class="weui-dialog__wrp" bindtap="closebangDialog">
+      <view class="weui-dialog" catchtap="stopbangEvent">
+        <view class="weui-dialog__hd" style="padding:20rpx 48rpx 20rpx;">
+          <view class="weui-dialog__title">房间名称</view>
+        </view>
+        <view class="weui-dialog__bd" style="margin-bottom:10rpx;">
+          <input class="weui-input tip_panel" placeholder="请输入房间名称" bindinput="data_Input"/>
+        </view>
+        <view class="weui-dialog__ft" style="line-height:100rpx;min-height:100rpx;">
+        <view class="weui-dialog__btn weui-dialog__btn_default" bindtap="closebangDialog">取消</view>
+          <view class="weui-dialog__btn" bindtap="tobangcar">确定</view>
+        </view>
       </view>
     </view>
   </view>

@@ -342,6 +342,41 @@ Page({
   },
   affirm: function() {
     var that = this;
+    var disable = wx.getStorageSync('disable')
+    var ispass = wx.getStorageSync('ispass')
+    if (ispass == false){
+      wx.showModal({
+        title: '未绑定学号',
+        content: '您未绑定学号，绑定后才能发布订单',
+        confirmText: "确定",
+        cancelText: "取消",
+        success: function (res) {
+          console.log(res);
+          if (res.confirm) {
+            console.log('用户点击主操作')
+          } else {
+            console.log('用户点击辅助操作')
+          }
+        }
+      });
+    }else{
+      if (disable == false){
+        that.affirm_order()
+      }else{
+        wx.showToast({
+          title: '你已被禁用',
+          image: '/images/icons/wrong.png',
+          duration: 0,
+          mask: true,
+          success: function(res) {},
+          fail: function(res) {},
+          complete: function(res) {},
+        })
+      }
+    }
+  },
+  affirm_order:function(){
+    var that = this;
     var ordersenddate = that.data.start_date + ' ' + that.data.time + ':00';
     var startaddressid = that.data.start_id;
     var endaddressid = that.data.end_id;
@@ -356,8 +391,8 @@ Page({
       responseType: 'text',
       header: {
         'Cookie': wx.getStorageSync('cookieKey')
-      }, 
-      data:{
+      },
+      data: {
         'ordersenddate': ordersenddate,
         'startaddressid': startaddressid,
         'endaddressid': endaddressid,
@@ -367,7 +402,7 @@ Page({
         'ordertype': ordertype,
         'weight': weight
       },
-      success: function(res) {
+      success: function (res) {
         console.log("返回结果" + JSON.stringify(res));
         var status = res.data.status;
         if (status == 0) {
@@ -378,23 +413,23 @@ Page({
             fail: function (res) { },
             complete: function (res) { },
           })
-        }else{
+        } else {
           var msg = res.data.msg;
           wx.showToast({
             title: msg,
             image: '/images/icons/wrong.png',
             duration: 0,
             mask: true,
-            success: function(res) {},
-            fail: function(res) {},
-            complete: function(res) {},
+            success: function (res) { },
+            fail: function (res) { },
+            complete: function (res) { },
           })
         }
       },
-      fail: function(res) {
+      fail: function (res) {
         console.log("返回错误" + res);
       },
-      complete: function(res) {
+      complete: function (res) {
         console.log("启动请求" + res);
       },
     })

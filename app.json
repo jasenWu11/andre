@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/runner_order_list/runner_order_list",
     "pages/order_detail/order_detail",
     "pages/mine/mine",
     "pages/runner_agreement/runner_agreement",
@@ -18,7 +19,8 @@
     "pages/logs/logs",
     "component/wxzx-slider/wxzx-slider",
     "component/wxzx-progress/wxzx-progress",
-    "pages/update_address/update_address"
+    "pages/update_address/update_address",
+    "pages/runner_order_detail/runner_order_detail"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -1,4 +1,4 @@
-// pages/order_detail/order_detail.js
+// pages/runner_order_detail/runner_order_detail.js
 const app = getApp();
 let QQMapWX = require('../../libs/qqmap-wx-jssdk.min.js');
 var star_data = require("../../js/test.js").star_data;
@@ -40,7 +40,9 @@ Page({
     rnickname: '',
     rphone: '',
     satisfaction: '',
-    satisfact_text: ''
+    satisfact_text: '',
+    next_text: '确定接单',
+    hidden_canel: "flex"
   },
 
   /**
@@ -299,13 +301,13 @@ Page({
                 header: {
                   'Cookie': wx.getStorageSync('cookieKey')
                 },
-                data:{
+                data: {
                   orderid: that.data.o_id,
                   orderstar: star_num,
                   remarks: that.data.evaluation_text
                 },
                 responseType: 'text',
-                success: function (res) {
+                success: function(res) {
                   console.log("返回结果" + JSON.stringify(res));
                   var status = res.data.status;
                   if (status == 0) {
@@ -317,14 +319,14 @@ Page({
                     })
                   }
                 },
-                fail: function (res) {
+                fail: function(res) {
                   console.log("返回错误" + res);
                 },
-                complete: function (res) {
+                complete: function(res) {
                   console.log("启动请求" + res);
                 },
               })
-            }else{
+            } else {
               wx.showToast({
                 title: '内含违规文字',
                 image: '/images/icons/wrong.png',
@@ -395,28 +397,41 @@ Page({
             var evaluate = data.evaluate;
             var orderstate = order.orderstate;
             var state_text = '';
+            var next_text = '';
             var hiddevaluate = true;
+            var hidden_canel = "flex"
             switch (orderstate) {
               case 0:
-                state_text = "等待用户支付"
+                state_text = "等待用户支付",
+                hidden_canel = "flex"
                 break;
               case 1:
-                state_text = "等待骑手接单"
+                state_text = "等待骑手接单",
+                next_text = '确定接单',
+                hidden_canel = "flex"
                 break;
               case 2:
-                state_text = "等待骑手送达"
+                state_text = "等待骑手送达",
+                next_text = '确定送达',
+                hidden_canel = "flex"
                 break;
               case 3:
                 state_text = "等待用户评价"
+                next_text = '任务完成',
+                hidden_canel = "none"
                 if (evaluate == null) {
                   hiddevaluate = false
                 }
                 break;
               case 4:
                 state_text = "订单已完成"
+                next_text = '任务完成',
+                hidden_canel = "none"
                 break;
               case 5:
                 state_text = "订单已取消"
+                next_text = '任务完成',
+                hidden_canel = "none"
                 break;
             }
             that.setData({
@@ -436,7 +451,9 @@ Page({
               hiddrunner: hiddrunner,
               state_text: state_text,
               hiddevaluate: hiddevaluate,
-              type_name: categoryname
+              type_name: categoryname,
+              next_text: next_text,
+              hidden_canel: hidden_canel
             })
             if (hiddrunner == false) {
               var rnickname = runner.nickname;

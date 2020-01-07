@@ -1,0 +1,376 @@
+/* pages/runner_order_detail/runner_order_detail.wxss */
+@import '/style/weui.wxss';
+page{
+  width: 100%;
+  height: 100%;
+  background-color: #eeeeee
+}
+
+.map_panel{
+  width: 100%;
+  height: 400rpx;
+}
+
+.content_panel{
+  margin: 30rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.content_panel .top_panel{
+  width: 100%;
+  height: 250rpx;
+  background-color: #ffffff;
+  padding: 30rpx;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.top_panel .status_text{
+  color: #000000;
+  font-size: 34rpx;
+}
+
+.time_text{
+  color: #888888;
+  font-size: 28rpx;
+}
+
+.top_panel .top_button{
+  width: 100%;
+  height: 70rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.top_button .cancel_button{
+  width: 25%;
+  height: 100%;
+  background-color: #ffffff;
+  color: #000000;
+  font-size: 28rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-width: 0.5rpx;
+  border-style: solid;
+  border-color: #aaaaaa;
+  margin-right: 12rpx;
+}
+
+.top_button .tip_button{
+  width: 32%;
+  height: 100%;
+  background-color: #f9c349;
+  color: #000000;
+  font-size: 28rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 12rpx;
+}
+
+.tip_button .small_tip_text{
+  color: #da7b10;
+  font-size: 22rpx;
+  margin-left: 5rpx;
+}
+
+.circle_line{
+  width: 100%;
+  height: 40rpx;
+  display: flex;
+  align-items: center;
+  background-color: #ffffff;
+}
+
+.circle_line .circle_view_left{
+  width: 20rpx;
+  height: 40rpx;
+  border-radius: 0 20rpx 20rpx 0;
+  background-color: #eeeeee;
+}
+
+.line {
+  flex: 1;
+  height: 1rpx;
+  border-bottom: 1px dashed #cccccc;
+  display: flex;
+  align-items: center;
+  margin: 0rpx 13rpx;
+}
+
+.circle_line .circle_view_right{
+  width: 20rpx;
+  height: 40rpx;
+  border-radius: 20rpx 0 0 20rpx;
+  background-color: #eeeeee;
+}
+
+.runner_panle{
+  width: 100%;
+  background-color: #ffffff;
+  display: flex;
+  padding: 20rpx 40rpx;
+  box-sizing: border-box;
+  align-items: center;
+}
+
+.runner_panle .runner_head{
+  width: 100rpx;
+  height: 100rpx;
+}
+
+.runner_panle .info_panel{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.info_panel .name_view{
+  color: #000000;
+  font-size: 34rpx;
+  margin-bottom: 5rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.name_view .panle_view{
+  width: 130rpx;
+  height: 36rpx;
+  margin-left: 15rpx;
+  background-color: #fbd45d;
+  border-radius: 12rpx 0rpx 12rpx 0rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24rpx;
+  color: #2c2c2c
+}
+
+.info_panel .eval_text{
+  color: #2c2c2c;
+  font-size: 30rpx;
+}
+
+.runner_panle .call_image{
+  width: 70rpx;
+  height: 70rpx;
+}
+
+.address_panel{
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  padding: 15rpx 40rpx;
+  box-sizing: border-box;
+  align-items: center;
+}
+
+.address_panel .address_panel_title{
+  text-align: center;
+  color: #000000;
+  font-size: 32rpx;
+  font-weight: 500;
+}
+
+.address_panel .address_piece{
+  width: 50rpx;
+  height: 6rpx;
+  background-color: #fcb634;
+  margin: 8rpx 0rpx;
+}
+
+.address_panel .address_view{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: center;
+}
+
+.address_view .address_circle{
+  width: 14rpx;
+  height: 14rpx;
+  background-color: #0078ff;
+  border-radius: 7rpx;
+}
+
+.address_view .address_input{
+  margin-left: 20rpx;
+  flex: 1;
+  min-height: 80rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: #8b8b8b;
+  font-size: 28rpx;
+}
+
+.address_input .address_text{
+  color:#000000;
+}
+
+.address_input .phone_text{
+  font-size: 24rpx;
+  color:#acacac;
+}
+
+.address_view .address_choose{
+  color: #66ccff;
+  font-size: 27rpx;
+}
+
+.address_view .address_rectangle{
+  width: 14rpx;
+  height: 14rpx;
+  background-color: #666666;
+}
+
+.address_view .address_next_image{
+  width: 20rpx;
+  height: 20rpx;
+}
+
+.address_panel .time_view{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15rpx 25rpx;
+}
+
+.time_view .address_next_image{
+  width: 20rpx;
+  height: 20rpx;
+}
+.weui-demo-dialog{
+  visibility:hidden;
+  opacity:0;
+  transition:all .3s;
+  z-index:5000;
+}
+
+.order_type_text {
+  height: 50rpx;
+  color: #fff;
+  background-color: #66ccffbd;
+  font-size: 26rpx;
+  padding: 0rpx 15rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  margin-right: 10rpx;
+}
+
+.price_tip_text{
+  height: 80rpx;
+  color:#888888;
+  font-size: 30rpx;
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.price_text{
+  height: 80rpx;
+  color:#000000;
+  font-size: 28rpx;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.bottom_view_tip_text{
+   height: 80rpx;
+  color:#888888;
+  font-size: 30rpx;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.bottom_view_content_text{
+  height: 80rpx;
+  color:#000000;
+  font-size: 30rpx;
+  display: flex;
+  flex: 1;
+  justify-content: flex-start;
+  align-items: center;
+  margin-left: 40rpx;
+}
+.buttom_copy_button{
+  width: 120rpx;
+  height: 50rpx;
+  border-width: 0.5rpx;
+  border-color: #cccccc;
+  border-style: solid;
+  font-size: 30rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.evaluation_tip{
+  height: 80rpx;
+  color:#000000;
+  font-size: 34rpx;
+  font-weight: 500;
+  display: flex;
+  flex: 1;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.star_panel{
+  display: flex;
+  flex-direction: row;
+  width: 80%;
+  align-items: center;
+  justify-content: space-between;
+  margin: 15rpx 0rpx 20rpx 0rpx;
+}
+
+.star_view{
+  width: 70rpx;
+  height: 70rpx;
+}
+
+.weui-demo-dialog{
+  visibility:hidden;
+  opacity:0;
+}
+.weui-half-screen-dialog{
+  transition:all .3s;
+  transform:translateY(100%);
+}
+.weui-demo-dialog_show{
+  visibility:visible;
+  opacity:1;
+}
+.weui-demo-dialog_show .weui-half-screen-dialog{
+    transform:translateY(0);
+}
+.center_view{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.weui-demo-dialog{
+  visibility:hidden;
+  opacity:0;
+}
+.weui-demo-dialog_show{
+  visibility:visible;
+  opacity:1;
+}
