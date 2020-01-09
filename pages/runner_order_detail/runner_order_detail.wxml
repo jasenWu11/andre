@@ -64,7 +64,7 @@
   <view class="address_panel">
     <view class="address_view">
       <text class="price_tip_text">跑腿费</text>
-      <text class="price_text"><text style="color:#999999;">{{resultDistance}}</text>    ￥{{price}}</text>
+      <text class="price_text"><text style="color:#999999;">{{resultDistance}}</text> ￥{{price}}</text>
     </view>
   </view>
   <view class="address_panel" style="margin:25rpx 0rpx;">
@@ -82,52 +82,36 @@
       <text class="bottom_view_content_text">{{send_time}}</text>
     </view>
   </view>
-  <view class="weui-demo-dialog {{istrue ? 'weui-demo-dialog_show' : ''}}">
-    <view class="weui-mask" bindtap="closeDialog"></view>
-    <view class="weui-half-screen-dialog" catchtap="stopEvent">
-      <view class="weui-half-screen-dialog__hd">
-        <view class="weui-half-screen-dialog__hd__side">
-          <view bindtap="closeDialog" class="weui-icon-btn weui-icon-btn_close">关闭</view>
-        </view>
-        <view class="weui-half-screen-dialog__hd__main">
-          <text class="weui-half-screen-dialog__title">评价跑者</text>
-          <text class="weui-half-screen-dialog__subtitle">请如实评价</text>
-        </view>
+</view>
+<view class="weui-demo-dialog {{istrue ? 'weui-demo-dialog_show' : ''}}">
+  <view class="weui-mask" bindtap="closeDialog"></view>
+  <view class="weui-half-screen-dialog" catchtap="stopEvent">
+    <view class="weui-half-screen-dialog__hd">
+      <view class="weui-half-screen-dialog__hd__side">
+        <view bindtap="closeDialog" class="weui-icon-btn weui-icon-btn_close">关闭</view>
       </view>
-      <view class="weui-half-screen-dialog__bd center_view">
-        <view class="star_panel">
-          <block wx:for="{{star_data}}" wx:key="item">
-            <image class="star_view" src="{{item.src}}" data-sid="{{item.id}}" bindtap="change_star"></image>
-          </block>
-        </view>
-        <view class="weui-cells weui-cells_after-title" style="width:100%;">
-          <view class="weui-cell">
-            <view class="weui-cell__bd">
-              <textarea class="weui-textarea" placeholder="请输入评价内容" style="height: 3.3em" bindinput="data_Input"/>
-              <view class="weui-textarea-counter">0/200</view>
-            </view>
+      <view class="weui-half-screen-dialog__hd__main">
+        <text class="weui-half-screen-dialog__title">评价跑者</text>
+        <text class="weui-half-screen-dialog__subtitle">请如实评价</text>
+      </view>
+    </view>
+    <view class="weui-half-screen-dialog__bd center_view">
+      <view class="star_panel">
+        <block wx:for="{{star_data}}" wx:key="item">
+          <image class="star_view" src="{{item.src}}" data-sid="{{item.id}}" bindtap="change_star"></image>
+        </block>
+      </view>
+      <view class="weui-cells weui-cells_after-title" style="width:100%;">
+        <view class="weui-cell">
+          <view class="weui-cell__bd">
+            <textarea class="weui-textarea" placeholder="请输入评价内容" style="height: 3.3em" bindinput="data_Input" />
+            <view class="weui-textarea-counter">0/200</view>
           </view>
         </view>
       </view>
-      <view class="weui-half-screen-dialog__ft">
-        <button type="primary" class="weui-btn" bindtap="affirm_evaluation">提交评价</button>
-      </view>
     </view>
-  </view><view class="weui-demo-dialog {{bangtrue ? 'weui-demo-dialog_show' : ''}}">
-    <view class="weui-mask" bindtap="closebangDialog"></view>
-    <view class="weui-dialog__wrp" bindtap="closebangDialog">
-      <view class="weui-dialog" catchtap="stopbangEvent">
-        <view class="weui-dialog__hd" style="padding:20rpx 48rpx 20rpx;">
-          <view class="weui-dialog__title">房间名称</view>
-        </view>
-        <view class="weui-dialog__bd" style="margin-bottom:10rpx;">
-          <input class="weui-input tip_panel" placeholder="请输入房间名称" bindinput="data_Input"/>
-        </view>
-        <view class="weui-dialog__ft" style="line-height:100rpx;min-height:100rpx;">
-        <view class="weui-dialog__btn weui-dialog__btn_default" bindtap="closebangDialog">取消</view>
-          <view class="weui-dialog__btn" bindtap="tobangcar">确定</view>
-        </view>
-      </view>
+    <view class="weui-half-screen-dialog__ft">
+      <button type="primary" class="weui-btn" bindtap="affirm_evaluation">提交评价</button>
     </view>
   </view>
 </view>

@@ -107,7 +107,8 @@ Page({
       end_latitude: end_latitude,
       end_longitude: end_longitude,
       moneys: moneys,
-      distance_text: (distance / 1000).toFixed(1) + '公里'
+      distance_text: (distance / 1000).toFixed(1) + '公里',
+      student_no:''
     })
   },
 
@@ -353,7 +354,7 @@ Page({
         success: function (res) {
           console.log(res);
           if (res.confirm) {
-            console.log('用户点击主操作')
+            that.openbangDialog()
           } else {
             console.log('用户点击辅助操作')
           }
@@ -442,6 +443,55 @@ Page({
   bindTimeChange: function(e) {
     this.setData({
       time: e.detail.value
+    })
+  },
+  openbangDialog: function (event) {
+    this.setData({
+      bangtrue: true
+    })
+  },
+  closebangDialog: function () {
+    this.setData({
+      bangtrue: false
+    })
+  },
+  data_Input: function (e) {
+    this.setData({
+      student_no: e.detail.value
+    })
+  },
+  tobang:function(){
+    var that = this;
+    var sno = this.data.student_no+'';
+    console.log('绑定学号' + sno)
+    wx.request({
+      url: app.globalData.URL + '/user/update.do?username=' + sno,
+      method: 'get',
+      dataType: 'json',
+      responseType: 'text',
+      header: {
+        'Cookie': wx.getStorageSync('cookieKey')
+      },
+      success: function (res) {
+        console.log("返回结果" + JSON.stringify(res));
+        var status = res.data.status;
+        if (status == 0) {
+          wx.showToast({
+            title: '等待管理员审核',
+            icon: 'success',
+            duration: 2000
+          });
+        }
+      },
+      fail: function (res) {
+        console.log("返回错误" + res);
+      },
+      complete: function (res) {
+        console.log("启动请求" + res);
+      },
+    })
+    this.setData({
+      bangtrue: false
     })
   }
 })

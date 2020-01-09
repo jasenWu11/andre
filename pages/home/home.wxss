@@ -17,7 +17,7 @@ page{
   width: 100%;
   display: flex;
   flex-direction: row;
-  padding: 0rpx 25rpx 15rpx 25rpx;
+  padding: 10rpx 25rpx 15rpx 25rpx;
   align-items: center;
   text-align: center;
   box-sizing: border-box;
