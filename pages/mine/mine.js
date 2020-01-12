@@ -1,4 +1,5 @@
 // pages/mine/mine.js
+const app = getApp();
 Page({
 
   /**
@@ -101,6 +102,76 @@ Page({
       success: function(res) {},
       fail: function(res) {},
       complete: function(res) {},
+    })
+  },
+  change_no:function(){
+    var that = this;
+    wx.showModal({
+      title: '改绑学号',
+      content: '解绑当前学号，改绑其他学号',
+      confirmText: "确定",
+      cancelText: "取消",
+      success: function (res) {
+        console.log(res);
+        if (res.confirm) {
+          that.openbangDialog()
+        } else {
+          console.log('用户点击辅助操作')
+        }
+      }
+    });
+  },
+  openbangDialog: function (event) {
+    this.setData({
+      bangtrue: true
+    })
+  },
+  closebangDialog: function () {
+    this.setData({
+      bangtrue: false
+    })
+  },
+  data_Input: function (e) {
+    this.setData({
+      student_no: e.detail.value
+    })
+  },
+  tobang: function () {
+    var that = this;
+    var sno = this.data.student_no + '';
+    console.log('绑定学号' + sno)
+    wx.request({
+      url: app.globalData.URL + '/user/update.do?username=' + sno,
+      method: 'get',
+      dataType: 'json',
+      responseType: 'text',
+      header: {
+        'Cookie': wx.getStorageSync('cookieKey')
+      },
+      success: function (res) {
+        console.log("返回结果" + JSON.stringify(res));
+        var status = res.data.status;
+        if (status == 0) {
+          wx.showToast({
+            title: '等待管理员审核',
+            icon: 'success',
+            duration: 2000
+          });
+          wx.setStorageSync('uname', that.data.student_no)
+          that.setData({
+            sno: that.data.student_no
+          })
+        }
+      },
+      fail: function (res) {
+        console.log("返回错误" + res);
+      },
+      complete: function (res) {
+        console.log("启动请求" + res);
+      },
+    })
+    this.setData({
+      bangtrue: false
     })
   }
 })

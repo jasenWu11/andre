@@ -5,3 +5,24 @@ page{
   height: 100%;
   background-color: #eeeeee;
 }
+.weui-demo-dialog{
+  visibility:hidden;
+  opacity:0;
+  transition:all .3s;
+  z-index:5000;
+}
+.weui-half-screen-dialog{
+  transition:all .3s;
+  transform:translateY(100%);
+  border-top-left-radius: 0rpx;
+  border-top-right-radius: 0rpx;
+  z-index:5000;
+}
+.weui-demo-dialog_show{
+  visibility:visible;
+  opacity:1;
+  z-index:5000;
+}
+.weui-demo-dialog_show .weui-half-screen-dialog{
+    transform:translateY(0);
+}

@@ -8,10 +8,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    tabs: ["全部", "待支付", "待接单", "待送达", "待评价", "已完成", "已取消"],
+    tabs: ["全部", "待支付", "待接单", "待送达", '待确认',"待评价", "已完成", "已取消"],
     activeIndex : 0,
-    order_data:[],
-    order_data_list:{}
+    order_data:[]
   },
 
   /**
@@ -27,11 +26,6 @@ Page({
         });
       }
     });
-    this.getmyorder_list();
-    for(var i = 0;i<5;i++){
-      this.getmyorder_list_bytype(i);
-    }
-    console.log(JSON.stringify(this.data.order_data_list));
   },
 
   /**
@@ -45,7 +39,15 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    console.log('刷新');
+    this.setData({
+      order_data_list: {}
+    })
+    this.getmyorder_list();
+    for (var i = 0; i < 7; i++) {
+      this.getmyorder_list_bytype(i);
+    }
+    console.log(JSON.stringify(this.data.order_data_list));
   },
 
   /**
@@ -140,7 +142,7 @@ Page({
         'Cookie': wx.getStorageSync('cookieKey')
       },
       success: function (res) {
-        console.log("返回结果" + JSON.stringify(res));
+        console.log(that.data.tabs[type + 1]+"的返回结果" + JSON.stringify(res));
         var status = res.data.status;
         if (status == 0) {
           var types = 'type'+type;

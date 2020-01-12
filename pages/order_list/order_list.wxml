@@ -291,6 +291,46 @@
             </block>
           </view>
         </view>
+        <view class="weui-tab__content" hidden="{{activeIndex != 7}}">
+          <view class="order_list">
+            <block wx:for="{{order_data_list.type6}}" wx:key="item">
+              <view class="order_item" bindtap="to_detail" data-oid="{{item.order.id}}">
+                <view class="title_panel">
+                  <text class="order_type_text">取送件</text>
+                  <text class="item_type_text">{{item.order.categoryname}}</text>
+                  <text class="status_text">{{item.status_name}}</text>
+                </view>
+                <view class="line"></view>
+                <view class="address_view">
+                  <view class="address_circle"></view>
+                  <view class="address_input" bindinput='getStart' bindtap="add_address" data-type="0">
+                    <text class="address_text"> {{item.startAddress.address}} 
+                      <block wx:if="{{item.startAddress.details == 'null'}}">
+                        {{item.startAddress.details}}
+                      </block>
+                    </text>
+                    <text class="phone_text">{{item.startAddress.username}}  {{item.startAddress.phone}}</text>
+                  </view>
+                </view>
+                <view class="address_view">
+                  <view class="address_circle" style="background-color:#fb5e21"></view>
+                  <view class="address_input" bindinput='getEnd' bindtap="add_address" data-type="1">
+                    <text class="address_text"> {{item.endAddress.address}} 
+                      <block wx:if="{{item.startAddress.details == 'null'}}">
+                        {{item.startAddress.details}}
+                      </block></text>
+                    <text class="phone_text">{{item.endAddress.username}}  {{item.endAddress.phone}}</text>
+                  </view>
+                </view>
+                <view class="line"></view>
+                <view class="bottom_panel">
+                  <text>{{item.order.ordercreatedate}}</text>
+                  <view class="button_view">再来一单</view>
+                </view>
+              </view>
+            </block>
+          </view>
+        </view>
       </view>
     </view>
   </view>

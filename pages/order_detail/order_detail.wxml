@@ -3,12 +3,10 @@
 <view class="content_panel">
   <view class="top_panel">
     <text class="status_text">{{state_text}}></text>
-    <text class="time_text">正在为您寻找骑手，预计在<text style="color:#66ccff">9:50</text>内接单</text>
+    <text class="time_text">{{time_text}}</text>
     <view class="top_button">
-      <view class="cancel_button">取消订单</view>
-      <view class="tip_button">加小费
-        <text class="small_tip_text">接单更快</text>
-      </view>
+      <view class="cancel_button" catchtap='canel_order' style="display:{{canel_state}}">取消订单</view>
+      <view class="tip_button" catchtap='showInputLayer' style="display:{{hidden_pay}}">{{pay_text}}</view>
     </view>
   </view>
   <view class="circle_line" hidden="{{hiddrunner}}">
@@ -74,7 +72,7 @@
   <view class="address_panel">
     <view class="address_view">
       <text class="price_tip_text">跑腿费</text>
-      <text class="price_text"><text style="color:#999999;">{{resultDistance}}</text>    ￥{{price}}</text>
+      <text class="price_text"><text style="color:#999999;">{{resultDistance}}</text> ￥{{price}}</text>
     </view>
   </view>
   <view class="address_panel" style="margin:25rpx 0rpx;">
@@ -113,7 +111,7 @@
         <view class="weui-cells weui-cells_after-title" style="width:100%;">
           <view class="weui-cell">
             <view class="weui-cell__bd">
-              <textarea class="weui-textarea" placeholder="请输入评价内容" style="height: 3.3em" bindinput="data_Input"/>
+              <textarea class="weui-textarea" placeholder="请输入评价内容" style="height: 3.3em" bindinput="data_Input" />
               <view class="weui-textarea-counter">0/200</view>
             </view>
           </view>
@@ -122,6 +120,28 @@
       <view class="weui-half-screen-dialog__ft">
         <button type="primary" class="weui-btn" bindtap="affirm_evaluation">提交评价</button>
       </view>
+    </view>
+  </view>
+  <!-- 密码输入框 -->
+  <view wx:if='{{showPayPwdInput}}'>
+    <view class='bg_layer'></view>
+    <view class='input_main'>
+      <view class='input_title'>
+        <view class='input_back' catchtap='hidePayLayer'>
+          <text></text>
+        </view>
+        <text>输入支付密码</text>
+      </view>
+      <view class='input_tip'>
+        <text>使用会员卡余额支付需要验证身份，验证通过后才可进行支付。</text>
+      </view>
+      <view class='input_row' catchtap='getFocus'>
+        <view class='pwd_item' wx:for='{{6}}' wx:key='item' wx:for-index='i'>
+          <text wx:if='{{pwdVal.length>i}}'></text>
+        </view>
+      </view>
+      <view class='forget_pwd' catchtap='hidePayLayer'>忘记密码</view>
+      <input class='input_control' password type='number' focus='{{payFocus}}' bindinput='inputPwd' maxlength='6' />
     </view>
   </view>
 </view>

@@ -18,12 +18,12 @@
     <view class="weui-cell__bd">我的订单</view>
     <view class="weui-cell__ft weui-cell__ft_in-access"></view>
   </view>
-  <view url="" class="weui-cell weui-cell_example weui-cell_access" hover-class="weui-cell_active">
+  <view class="weui-cell weui-cell_example weui-cell_access" hover-class="weui-cell_active" bindtap="change_no">
     <view class="weui-cell__hd">
-      <image src="/images/icons/envelope.png" style="margin-right: 16px;vertical-align: middle;width:20px; height: 20px;"></image>
+      <image src="/images/icons/uname.png" style="margin-right: 16px;vertical-align: middle;width:20px; height: 20px;"></image>
     </view>
-    <view class="weui-cell__bd">我的红包</view>
-    <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+    <view class="weui-cell__bd">绑定学号</view>
+    <view class="weui-cell__ft weui-cell__ft_in-access">{{sno}}</view>
   </view>
 </view>
 <view class="weui-cells weui-cells_after-title" style="margin-top:15rpx;">
@@ -55,4 +55,21 @@
     <view class="weui-cell__bd">意见反馈</view>
     <view class="weui-cell__ft weui-cell__ft_in-access"></view>
   </button>
+  <view class="weui-demo-dialog {{bangtrue ? 'weui-demo-dialog_show' : ''}}">
+    <view class="weui-mask" bindtap="closebangDialog"></view>
+    <view class="weui-dialog__wrp" bindtap="closebangDialog">
+      <view class="weui-dialog" catchtap="stopbangEvent">
+        <view class="weui-dialog__hd" style="padding:20rpx 48rpx 20rpx;">
+          <view class="weui-dialog__title">学号</view>
+        </view>
+        <view class="weui-dialog__bd" style="margin-bottom:10rpx;">
+          <input class="weui-input tip_panel" placeholder="请输入你的学号" bindinput="data_Input" />
+        </view>
+        <view class="weui-dialog__ft" style="line-height:100rpx;min-height:100rpx;">
+          <view class="weui-dialog__btn weui-dialog__btn_default" bindtap="closebangDialog">取消</view>
+          <view class="weui-dialog__btn" bindtap="tobang">确定</view>
+        </view>
+      </view>
+    </view>
+  </view>
 </view>

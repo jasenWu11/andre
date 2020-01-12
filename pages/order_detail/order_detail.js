@@ -28,6 +28,7 @@ Page({
     end_doorplate: "",
     end_name: "",
     end_phone: "",
+    orderstate: '',
     price: 0,
     o_id: '',
     creat_time: '',
@@ -40,7 +41,15 @@ Page({
     rnickname: '',
     rphone: '',
     satisfaction: '',
-    satisfact_text: ''
+    satisfact_text: '',
+    showPayPwdInput: false, //是否展示密码输入层
+    pwdVal: '', //输入的密码
+    payFocus: true, //文本框焦点
+    time_text: '正在为您寻找骑手，预计在 5分钟 内接单',
+    hidden_pay:'flex',
+    canel_state:'flex',
+    canceltype:'',
+    pay_text:'支付订单'
   },
 
   /**
@@ -299,13 +308,13 @@ Page({
                 header: {
                   'Cookie': wx.getStorageSync('cookieKey')
                 },
-                data:{
+                data: {
                   orderid: that.data.o_id,
                   orderstar: star_num,
                   remarks: that.data.evaluation_text
                 },
                 responseType: 'text',
-                success: function (res) {
+                success: function(res) {
                   console.log("返回结果" + JSON.stringify(res));
                   var status = res.data.status;
                   if (status == 0) {
@@ -315,16 +324,21 @@ Page({
                     wx.showToast({
                       title: '评论发布成功',
                     })
+                    var orderstate = 5
+                    that.setData({
+                      orderstate: orderstate
+                    })
+                    that.set_status(orderstate, that.data.evaluation_text);
                   }
                 },
-                fail: function (res) {
+                fail: function(res) {
                   console.log("返回错误" + res);
                 },
-                complete: function (res) {
+                complete: function(res) {
                   console.log("启动请求" + res);
                 },
               })
-            }else{
+            } else {
               wx.showToast({
                 title: '内含违规文字',
                 image: '/images/icons/wrong.png',
@@ -394,31 +408,12 @@ Page({
             }
             var evaluate = data.evaluate;
             var orderstate = order.orderstate;
-            var state_text = '';
-            var hiddevaluate = true;
-            switch (orderstate) {
-              case 0:
-                state_text = "等待用户支付"
-                break;
-              case 1:
-                state_text = "等待骑手接单"
-                break;
-              case 2:
-                state_text = "等待骑手送达"
-                break;
-              case 3:
-                state_text = "等待用户评价"
-                if (evaluate == null) {
-                  hiddevaluate = false
-                }
-                break;
-              case 4:
-                state_text = "订单已完成"
-                break;
-              case 5:
-                state_text = "订单已取消"
-                break;
+            if (orderstate == 6){
+              that.setData({
+                canceltype: order.canceltype
+              })
             }
+            that.set_status(orderstate, evaluate);
             that.setData({
               start_address: saddress,
               end_address: eaddress,
@@ -434,15 +429,14 @@ Page({
               send_time: ordersenddate,
               weight_text: weight,
               hiddrunner: hiddrunner,
-              state_text: state_text,
-              hiddevaluate: hiddevaluate,
-              type_name: categoryname
+              type_name: categoryname,
+              orderstate: orderstate
             })
             if (hiddrunner == false) {
               var rnickname = runner.nickname;
               var rphone = runner.phone;
               var start = runner.start;
-              var satisfaction = (start / 5) * 100
+              var satisfaction = ((start / 5) * 100).toFixed(2)
               console.log(satisfaction + '满意度')
               var satisfact_text = "跑腿新手"
               if (satisfaction == 100) {
@@ -473,5 +467,262 @@ Page({
         console.log("启动请求" + res);
       },
     })
+  },
+  /**
+   * 显示支付密码输入层
+   */
+  showInputLayer: function() {
+    var that =this;
+    var orderstate = this.data.orderstate;
+    var o_id = that.data.o_id;
+    if (orderstate == 0){
+      this.setData({
+        showPayPwdInput: true,
+        payFocus: true
+      });
+    } else if (orderstate == 3){
+      console.log('用户确认')
+      wx.request({
+        url: app.globalData.URL + '/order/confirm.do?id=' + o_id,
+        method: 'get',
+        dataType: 'json',
+        header: {
+          'Cookie': wx.getStorageSync('cookieKey')
+        },
+        responseType: 'text',
+        success: function (res) {
+          console.log("返回结果" + JSON.stringify(res));
+          var status = res.data.status;
+          if (status == 0) {
+            wx.showToast({
+              title: '确认送达成功',
+              icon: 'success'
+            })
+            var orderstate = that.data.orderstate;
+            orderstate++;
+            that.setData({
+              orderstate: orderstate
+            })
+            that.set_status(orderstate, null);
+          } else {
+            var msg = res.data.msg;
+            wx.showToast({
+              title: msg,
+              image: '/images/icons/wrong.png',
+            })
+          }
+        },
+        fail: function (res) {
+          console.log("返回错误" + res);
+        },
+        complete: function (res) {
+          console.log("启动请求" + res);
+        },
+      })
+    }
+  },
+  /**
+   * 隐藏支付密码输入层
+   */
+  hidePayLayer: function() {
+    var that = this;
+    /**获取输入的密码**/
+    var val = this.data.pwdVal;
+    var o_id = that.data.o_id;
+    /**在这调用支付接口**/
+    this.setData({
+      showPayPwdInput: false,
+      payFocus: false,
+      pwdVal: ''
+    }, function() {
+      /**弹框**/
+      if (val == '') {
+        wx.showToast({
+          title: '取消付款'
+        })
+      } else {
+        wx.request({
+          url: app.globalData.URL + '/order/pay.do?id=' + o_id,
+          method: 'get',
+          dataType: 'json',
+          header: {
+            'Cookie': wx.getStorageSync('cookieKey')
+          },
+          responseType: 'text',
+          success: function(res) {
+            console.log("返回结果" + JSON.stringify(res));
+            var status = res.data.status;
+            if (status == 0) {
+              wx.showToast({
+                title: '支付成功',
+                icon: 'success'
+              })
+              var orderstate = that.data.orderstate;
+              orderstate++;
+              that.setData({
+                orderstate: orderstate
+              })
+              that.set_status(orderstate, null);
+            } else {
+              var msg = res.data.msg;
+              wx.showToast({
+                title: msg,
+                image: '/images/icons/wrong.png',
+              })
+            }
+          },
+          fail: function(res) {
+            console.log("返回错误" + res);
+          },
+          complete: function(res) {
+            console.log("启动请求" + res);
+          },
+        })
+      }
+    });
+
+  },
+  /**
+   * 获取焦点
+   */
+  getFocus: function() {
+    this.setData({
+      payFocus: true
+    });
+  },
+  /**
+   * 输入密码监听
+   */
+  inputPwd: function(e) {
+    this.setData({
+      pwdVal: e.detail.value
+    });
+
+    if (e.detail.value.length >= 6) {
+      this.hidePayLayer();
+    }
+  },
+  set_status: function (orderstate, evaluate) {
+    var state_text = '';
+    var time_text = '正在为您寻找骑手，预计在 5分钟 内接单';
+    var hiddevaluate = true;
+    var hidden_pay = 'none';
+    var canel_state = 'none'
+    var pay_text = '支付订单'
+    console.log('orderstate是' + orderstate)
+    switch (orderstate) {
+      case 0:
+        state_text = "等待用户支付"
+        time_text = '订单创建成功，请在 10分钟 内付款'
+        hidden_pay = 'flex';
+        canel_state = 'flex';
+        break;
+      case 1:
+        state_text = "等待骑手接单"
+        hidden_pay = 'none';
+        canel_state = 'flex';
+        break;
+      case 2:
+        state_text = "等待骑手送达"
+        time_text = '跑腿正在加急中，请耐心等候'
+        hidden_pay = 'none';
+        canel_state = 'flex';
+        break;
+      case 3:
+        state_text = "等待用户确认送达"
+        time_text = '跑腿已经送达，请确认'
+        pay_text = '确认送达'
+        hidden_pay = 'flex';
+        canel_state = 'none';
+        break;
+      case 4:
+        state_text = "等待用户评价"
+        time_text = '订单确认成功，请为跑腿评价'
+        hidden_pay = 'none';
+        canel_state = 'none';
+        if (evaluate == null) {
+          hiddevaluate = false
+        }
+        break;
+      case 5:
+        state_text = "订单已完成"
+        hidden_pay = 'none';
+        time_text = '订单已完成，欢迎下次使用'
+        canel_state = 'none';
+        break;
+      case 6:
+        state_text = "订单已取消"
+        hidden_pay = 'none';
+        canel_state = 'none';
+        var canceltype = this.data.canceltype;
+        if (canceltype == 11){
+          var time_text = '用户已取消订单，欢迎再次下单';
+        } else if (canceltype == 12){
+          var time_text = '跑腿已取消订单，请重新下单';
+        }
+        break;
+    }
+    this.setData({
+      state_text: state_text,
+      time_text: time_text,
+      hiddevaluate: hiddevaluate,
+      hidden_pay: hidden_pay,
+      canel_state: canel_state,
+      pay_text: pay_text
+    })
+  },
+  canel_order:function(){
+    var that = this;
+    var o_id = that.data.o_id;
+    wx.showModal({
+      title: '是否取消订单',
+      content: '取消订单，将无法享受跑腿服务',
+      confirmText: "确定",
+      cancelText: "取消",
+      success: function (res) {
+        console.log(res);
+        if (res.confirm) {
+          wx.request({
+            url: app.globalData.URL + '/order/cancel.do?id=' + o_id,
+            method: 'get',
+            dataType: 'json',
+            header: {
+              'Cookie': wx.getStorageSync('cookieKey')
+            },
+            responseType: 'text',
+            success: function (res) {
+              console.log("返回结果" + JSON.stringify(res));
+              var status = res.data.status;
+              if (status == 0) {
+                wx.showToast({
+                  title: '订单已取消',
+                  icon: 'success'
+                })
+                var orderstate = 6
+                that.setData({
+                  orderstate: orderstate,
+                  canceltype: 11
+                })
+                that.set_status(orderstate, null);
+              } else {
+                var msg = res.data.msg;
+                wx.showToast({
+                  title: msg,
+                  image: '/images/icons/wrong.png',
+                })
+              }
+            },
+            fail: function (res) {
+              console.log("返回错误" + res);
+            },
+            complete: function (res) {
+              console.log("启动请求" + res);
+            },
+          })
+        } else {
+          console.log('用户点击辅助操作')
+        }
+      }
+    });
   }
 })
