@@ -277,7 +277,10 @@ Page({
         }
       },
       fail: function (res) {
-        console.log(res);
+        wx.showToast({
+          title: '请求异常',
+          image: '/images/icons/wrong.png',
+        })
       },
       complete: function (res) {
         console.log(res);

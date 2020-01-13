@@ -152,8 +152,11 @@ Page({
           });
         }
       },
-      fail: function(res) {
-        console.log(res);
+      fail: function (res) {
+        wx.showToast({
+          title: '请求异常',
+          image: '/images/icons/wrong.png',
+        })
       },
       complete: function(res) {
         console.log(res);
@@ -317,10 +320,19 @@ Page({
                     wx.showToast({
                       title: '评论发布成功',
                     })
+                  } else {
+                    var msg = res.data.msg
+                    wx.showToast({
+                      title: msg,
+                      image: '/images/icons/wrong.png',
+                    })
                   }
                 },
-                fail: function(res) {
-                  console.log("返回错误" + res);
+                fail: function (res) {
+                  wx.showToast({
+                    title: '请求异常',
+                    image: '/images/icons/wrong.png',
+                  })
                 },
                 complete: function(res) {
                   console.log("启动请求" + res);
@@ -481,10 +493,19 @@ Page({
               })
             }
           }
+        } else {
+          var msg = res.data.msg
+          wx.showToast({
+            title: msg,
+            image: '/images/icons/wrong.png',
+          })
         }
       },
-      fail: function(res) {
-        console.log("返回错误" + res);
+      fail: function (res) {
+        wx.showToast({
+          title: '请求异常',
+          image: '/images/icons/wrong.png',
+        })
       },
       complete: function(res) {
         console.log("启动请求" + res);

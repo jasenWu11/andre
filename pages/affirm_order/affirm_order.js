@@ -415,20 +415,18 @@ Page({
             complete: function (res) { },
           })
         } else {
-          var msg = res.data.msg;
+          var msg = res.data.msg
           wx.showToast({
             title: msg,
             image: '/images/icons/wrong.png',
-            duration: 0,
-            mask: true,
-            success: function (res) { },
-            fail: function (res) { },
-            complete: function (res) { },
           })
         }
       },
       fail: function (res) {
-        console.log("返回错误" + res);
+        wx.showToast({
+          title: '请求异常',
+          image: '/images/icons/wrong.png',
+        })
       },
       complete: function (res) {
         console.log("启动请求" + res);
@@ -481,10 +479,19 @@ Page({
             icon: 'success',
             duration: 2000
           });
+        }else {
+          var msg = res.data.msg
+          wx.showToast({
+            title: msg,
+            image: '/images/icons/wrong.png',
+          })
         }
       },
       fail: function (res) {
-        console.log("返回错误" + res);
+        wx.showToast({
+          title: '请求异常',
+          image: '/images/icons/wrong.png',
+        })
       },
       complete: function (res) {
         console.log("启动请求" + res);
