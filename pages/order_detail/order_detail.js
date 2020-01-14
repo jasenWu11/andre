@@ -303,7 +303,7 @@ Page({
           },
           success(res) {
             console.log("返回结果1" + JSON.stringify(res));
-            if (res.errcode != 87014) {
+            if (res.data.errcode != 87014) {
               wx.request({
                 url: app.globalData.URL + '/evaluate/add.do',
                 method: 'get',
@@ -353,12 +353,7 @@ Page({
             } else {
               wx.showToast({
                 title: '内含违规文字',
-                image: '/images/icons/wrong.png',
-                duration: 0,
-                mask: true,
-                success: function(res) {},
-                fail: function(res) {},
-                complete: function(res) {},
+                image: '/images/icons/wrong.png'
               })
             }
           }
