@@ -27,13 +27,13 @@
   </view>
 </view>
 <view class="weui-cells weui-cells_after-title" style="margin-top:15rpx;">
-  <view url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+  <!-- <view url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
     <view class="weui-cell__hd">
       <image src="/images/icons/invoice.png" style="margin-right: 16px;vertical-align: middle;width:20px; height: 20px;"></image>
     </view>
     <view class="weui-cell__bd">开具发票</view>
     <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-  </view>
+  </view> -->
   <view bindtap="to_setting" class="weui-cell weui-cell_example weui-cell_access" hover-class="weui-cell_active">
     <view class="weui-cell__hd">
       <image src="/images/icons/setting.png" style="margin-right: 16px;vertical-align: middle;width:20px; height: 20px;"></image>
@@ -63,7 +63,8 @@
           <view class="weui-dialog__title">学号</view>
         </view>
         <view class="weui-dialog__bd" style="margin-bottom:10rpx;">
-          <input class="weui-input tip_panel" placeholder="请输入你的学号" bindinput="data_Input" />
+          <input class="weui-input tip_panel" placeholder="请输入你的学号" bindinput="data_Input" style="margin:10rpx"/>
+          <input class="weui-input tip_panel" placeholder="请输入你的姓名" bindinput="name_Input" style="margin:10rpx"/>
         </view>
         <view class="weui-dialog__ft" style="line-height:100rpx;min-height:100rpx;">
           <view class="weui-dialog__btn weui-dialog__btn_default" bindtap="closebangDialog">取消</view>

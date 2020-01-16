@@ -29,8 +29,8 @@
     </view>
     <view class="address_panel">
       <view class="address_view" style="padding: 15rpx 25rpx;">
-        <text class="address_text"> 备注：</text>
-        <input class="weui-input" value="{{address}}" placeholder="物品描述或送件要求" bindinput="data_Input" />
+        <text class="address_text"> 备注</text>
+        <input class="weui-input" value="{{note}}" placeholder="物品描述或送件要求" bindinput="remark_Input" style="margin-left:5px"/>
       </view>
       <view class="line"></view>
       <view class="time_view">
@@ -95,7 +95,8 @@
           <view class="weui-dialog__title">学号</view>
         </view>
         <view class="weui-dialog__bd" style="margin-bottom:10rpx;">
-          <input class="weui-input tip_panel" placeholder="请输入你的学号" bindinput="data_Input" />
+          <input class="weui-input tip_panel" placeholder="请输入你的学号" bindinput="data_Input" style="margin:10rpx"/>
+          <input class="weui-input tip_panel" placeholder="请输入你的姓名" bindinput="name_Input" style="margin:10rpx"/>
         </view>
         <view class="weui-dialog__ft" style="line-height:100rpx;min-height:100rpx;">
           <view class="weui-dialog__btn weui-dialog__btn_default" bindtap="closebangDialog">取消</view>

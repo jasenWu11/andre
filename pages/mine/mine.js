@@ -136,12 +136,18 @@ Page({
       student_no: e.detail.value
     })
   },
+  name_Input: function (e) {
+    this.setData({
+      nickname: e.detail.value
+    })
+  },
   tobang: function () {
     var that = this;
     var sno = this.data.student_no + '';
+    var nickname = this.data.nickname + '';
     console.log('绑定学号' + sno)
     wx.request({
-      url: app.globalData.URL + '/user/update.do?username=' + sno,
+      url: app.globalData.URL + '/user/update.do?username=' + sno + '&nickname=' + nickname,
       method: 'get',
       dataType: 'json',
       responseType: 'text',

@@ -399,6 +399,10 @@ Page({
             }
             var ordercreatedate = order.ordercreatedate;
             var ordersenddate = order.ordersenddate;
+            var remarks = order.remarks;
+            if (remarks == null){
+              remarks = ''
+            }
             var runner = data.runner;
             var hiddrunner = true;
             if (runner == null) {
@@ -430,13 +434,14 @@ Page({
               weight_text: weight,
               hiddrunner: hiddrunner,
               type_name: categoryname,
-              orderstate: orderstate
+              orderstate: orderstate,
+              remarks: remarks
             })
             if (hiddrunner == false) {
               var rnickname = runner.nickname;
               var rphone = runner.phone;
               var start = runner.start;
-              var satisfaction = ((start / 5) * 100).toFixed(2)
+              var satisfaction = ((start / 5) * 100).toFixed(1)
               console.log(satisfaction + '满意度')
               var satisfact_text = "跑腿新手"
               if (satisfaction == 100) {

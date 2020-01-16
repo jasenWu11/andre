@@ -237,7 +237,7 @@ Page({
     };
     wx.request(opt);
   },
-  data_Input: function(e) {
+  remark_Input: function(e) {
     this.setData({
       note: e.detail.value
     })
@@ -385,6 +385,7 @@ Page({
     var goodcategoryid = type_id;
     var orderprice = that.data.moneys;
     var ordertype = 0;
+    var note = that.data.note;
     wx.request({
       url: app.globalData.URL + '/order/create.do',
       method: 'get',
@@ -401,7 +402,8 @@ Page({
         'goodcategoryid': goodcategoryid,
         'orderprice': orderprice,
         'ordertype': ordertype,
-        'weight': weight
+        'weight': weight,
+        'remarks': note
       },
       success: function (res) {
         console.log("返回结果" + JSON.stringify(res));
@@ -460,12 +462,18 @@ Page({
       student_no: e.detail.value
     })
   },
+  name_Input: function (e) {
+    this.setData({
+      nickname: e.detail.value
+    })
+  },
   tobang:function(){
     var that = this;
-    var sno = this.data.student_no+'';
+    var sno = this.data.student_no + '';
+    var nickname = this.data.nickname + '';
     console.log('绑定学号' + sno)
     wx.request({
-      url: app.globalData.URL + '/user/update.do?username=' + sno,
+      url: app.globalData.URL + '/user/update.do?username=' + sno + '&nickname=' + nickname,
       method: 'get',
       dataType: 'json',
       responseType: 'text',

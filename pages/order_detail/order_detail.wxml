@@ -75,6 +75,12 @@
       <text class="price_text"><text style="color:#999999;">{{resultDistance}}</text> ￥{{price}}</text>
     </view>
   </view>
+  <view class="address_panel" style="margin:25rpx 0rpx -5rpx 0rpx;">
+    <view class="note_view">
+      <text class="note_tip_text">备注</text>
+      <text class="note_content_text">{{remarks}}</text>
+    </view>
+  </view>
   <view class="address_panel" style="margin:25rpx 0rpx;">
     <view class="address_view">
       <text class="bottom_view_tip_text">订单号码</text>
