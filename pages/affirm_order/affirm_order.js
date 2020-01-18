@@ -108,7 +108,7 @@ Page({
       end_longitude: end_longitude,
       moneys: moneys,
       distance_text: (distance / 1000).toFixed(1) + '公里',
-      student_no:''
+      student_no: ''
     })
   },
 
@@ -345,13 +345,13 @@ Page({
     var that = this;
     var disable = wx.getStorageSync('disable')
     var ispass = wx.getStorageSync('ispass')
-    if (ispass == false){
+    if (ispass == false) {
       wx.showModal({
         title: '未绑定学号',
         content: '您未绑定学号，绑定后才能发布订单',
         confirmText: "确定",
         cancelText: "取消",
-        success: function (res) {
+        success: function(res) {
           console.log(res);
           if (res.confirm) {
             that.openbangDialog()
@@ -360,10 +360,10 @@ Page({
           }
         }
       });
-    }else{
-      if (disable == false){
+    } else {
+      if (disable == false) {
         that.affirm_order()
-      }else{
+      } else {
         wx.showToast({
           title: '你已被禁用',
           image: '/images/icons/wrong.png',
@@ -376,66 +376,74 @@ Page({
       }
     }
   },
-  affirm_order:function(){
+  affirm_order: function() {
     var that = this;
     var ordersenddate = that.data.start_date + ' ' + that.data.time + ':00';
-    var startaddressid = that.data.start_id;
-    var endaddressid = that.data.end_id;
-    var orderstate = 0;
-    var goodcategoryid = type_id;
-    var orderprice = that.data.moneys;
-    var ordertype = 0;
-    var note = that.data.note;
-    wx.request({
-      url: app.globalData.URL + '/order/create.do',
-      method: 'get',
-      dataType: 'json',
-      responseType: 'text',
-      header: {
-        'Cookie': wx.getStorageSync('cookieKey')
-      },
-      data: {
-        'ordersenddate': ordersenddate,
-        'startaddressid': startaddressid,
-        'endaddressid': endaddressid,
-        'orderstate': orderstate,
-        'goodcategoryid': goodcategoryid,
-        'orderprice': orderprice,
-        'ordertype': ordertype,
-        'weight': weight,
-        'remarks': note
-      },
-      success: function (res) {
-        console.log("返回结果" + JSON.stringify(res));
-        var status = res.data.status;
-        if (status == 0) {
-          var order_id = res.data.data
-          wx.navigateTo({
-            url: '../order_detail/order_detail?order_id=' + order_id,
-            success: function (res) { },
-            fail: function (res) { },
-            complete: function (res) { },
-          })
-        } else {
-          var msg = res.data.msg;
-          wx.showToast({
-            title: msg,
-            image: '/images/icons/wrong.png',
-            duration: 0,
-            mask: true,
-            success: function (res) { },
-            fail: function (res) { },
-            complete: function (res) { },
-          })
-        }
-      },
-      fail: function (res) {
-        console.log("返回错误" + res);
-      },
-      complete: function (res) {
-        console.log("启动请求" + res);
-      },
-    })
+    var state = new Date(ordersenddate) - new Date();
+    if (state < 0) {
+      wx.showToast({
+        title: '送达时间已过',
+        image: '/images/icons/wrong.png'
+      })
+    } else {
+      var startaddressid = that.data.start_id;
+      var endaddressid = that.data.end_id;
+      var orderstate = 0;
+      var goodcategoryid = type_id;
+      var orderprice = that.data.moneys;
+      var ordertype = 0;
+      var note = that.data.note;
+      wx.request({
+        url: app.globalData.URL + '/order/create.do',
+        method: 'get',
+        dataType: 'json',
+        responseType: 'text',
+        header: {
+          'Cookie': wx.getStorageSync('cookieKey')
+        },
+        data: {
+          'ordersenddate': ordersenddate,
+          'startaddressid': startaddressid,
+          'endaddressid': endaddressid,
+          'orderstate': orderstate,
+          'goodcategoryid': goodcategoryid,
+          'orderprice': orderprice,
+          'ordertype': ordertype,
+          'weight': weight,
+          'remarks': note
+        },
+        success: function(res) {
+          console.log("返回结果" + JSON.stringify(res));
+          var status = res.data.status;
+          if (status == 0) {
+            var order_id = res.data.data
+            wx.navigateTo({
+              url: '../order_detail/order_detail?order_id=' + order_id,
+              success: function(res) {},
+              fail: function(res) {},
+              complete: function(res) {},
+            })
+          } else {
+            var msg = res.data.msg;
+            wx.showToast({
+              title: msg,
+              image: '/images/icons/wrong.png',
+              duration: 0,
+              mask: true,
+              success: function(res) {},
+              fail: function(res) {},
+              complete: function(res) {},
+            })
+          }
+        },
+        fail: function(res) {
+          console.log("返回错误" + res);
+        },
+        complete: function(res) {
+          console.log("启动请求" + res);
+        },
+      })
+    }
   },
   bindDateChange: function(e) {
     this.setData({
@@ -447,27 +455,27 @@ Page({
       time: e.detail.value
     })
   },
-  openbangDialog: function (event) {
+  openbangDialog: function(event) {
     this.setData({
       bangtrue: true
     })
   },
-  closebangDialog: function () {
+  closebangDialog: function() {
     this.setData({
       bangtrue: false
     })
   },
-  data_Input: function (e) {
+  data_Input: function(e) {
     this.setData({
       student_no: e.detail.value
     })
   },
-  name_Input: function (e) {
+  name_Input: function(e) {
     this.setData({
       nickname: e.detail.value
     })
   },
-  tobang:function(){
+  tobang: function() {
     var that = this;
     var sno = this.data.student_no + '';
     var nickname = this.data.nickname + '';
@@ -480,7 +488,7 @@ Page({
       header: {
         'Cookie': wx.getStorageSync('cookieKey')
       },
-      success: function (res) {
+      success: function(res) {
         console.log("返回结果" + JSON.stringify(res));
         var status = res.data.status;
         if (status == 0) {
@@ -491,10 +499,10 @@ Page({
           });
         }
       },
-      fail: function (res) {
+      fail: function(res) {
         console.log("返回错误" + res);
       },
-      complete: function (res) {
+      complete: function(res) {
         console.log("启动请求" + res);
       },
     })
